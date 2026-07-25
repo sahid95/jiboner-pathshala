@@ -1,167 +1,22 @@
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Panel — জীবনের পাঠশালা</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-:root{--blue:#2563eb;--dark:#0f172a;--bg:#f1f5f9;--card:#fff;--muted:#64748b;--border:#e2e8f0;--danger:#dc2626}
-body{font-family:system-ui,-apple-system,"Noto Sans Bengali","Segoe UI",sans-serif;background:var(--bg);color:var(--dark);line-height:1.6}
-button,input,textarea,select{font:inherit}
-.login-wrap{min-height:100vh;display:grid;place-items:center;padding:20px;background:linear-gradient(135deg,#0f172a,#1d4ed8)}
-.login-card{width:100%;max-width:430px;background:#fff;border-radius:24px;padding:32px;box-shadow:0 20px 60px #0004}
-.logo{width:62px;height:62px;border-radius:20px;background:#eff6ff;color:var(--blue);display:grid;place-items:center;font-size:2rem;margin:0 auto 15px}
-h1{text-align:center;font-size:1.55rem}
-.subtitle{text-align:center;color:var(--muted);margin:5px 0 25px}
-label{display:block;font-weight:700;margin:14px 0 6px}
-input,textarea,select{width:100%;border:1px solid var(--border);border-radius:12px;padding:12px 14px;outline:none;background:#fff}
-input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2563eb20}
-textarea{min-height:180px;resize:vertical}
-.btn{border:0;border-radius:12px;padding:12px 18px;cursor:pointer;font-weight:800}
-.btn-primary{background:var(--blue);color:#fff}
-.btn-light{background:#eff6ff;color:#1d4ed8}
-.btn-danger{background:#fee2e2;color:var(--danger)}
-.full{width:100%;margin-top:20px}
-.demo{text-align:center;color:var(--muted);font-size:.85rem;margin-top:15px}
-.error{color:var(--danger);font-size:.9rem;margin-top:10px;display:none}
-.app{display:none;min-height:100vh}
-.sidebar{position:fixed;left:0;top:0;bottom:0;width:250px;background:var(--dark);color:#cbd5e1;padding:22px 15px}
-.side-brand{color:#fff;font-weight:900;font-size:1.2rem;display:flex;gap:10px;align-items:center;padding:10px 12px 25px}
-.side-brand span{font-size:1.6rem}
-.side-link{display:block;color:#cbd5e1;text-decoration:none;padding:12px 14px;border-radius:12px;margin:5px 0}
-.side-link:hover,.side-link.active{background:#1e40af;color:#fff}
-.logout{margin-top:25px;width:100%}
-.content{margin-left:250px;padding:25px;max-width:1400px}
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:25px}
-.topbar h2{font-size:1.7rem}
-.mobile-menu{display:none}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:25px}
-.stat{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px}
-.stat .icon{font-size:1.8rem}.stat h3{font-size:2rem;margin-top:8px}.stat p{color:var(--muted)}
-.panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:25px}
-.panel h3{margin-bottom:18px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.form-full{grid-column:1/-1}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.status{padding:12px;border-radius:10px;background:#ecfdf5;color:#166534;margin-top:15px;display:none}
-.post-list{display:grid;gap:12px}
-.post-item{border:1px solid var(--border);border-radius:14px;padding:15px;display:flex;justify-content:space-between;gap:15px;align-items:center}
-.post-item h4{margin-bottom:3px}.post-item small{color:var(--muted)}
-@media(max-width:800px){
-.sidebar{transform:translateX(-100%);transition:.25s;z-index:5}.sidebar.open{transform:translateX(0)}
-.content{margin-left:0;padding:16px}.mobile-menu{display:block}.cards{grid-template-columns:1fr}
-.form-grid{grid-template-columns:1fr}.form-full{grid-column:auto}
-.topbar h2{font-size:1.35rem}.post-item{align-items:flex-start;flex-direction:column}
-}
-</style>
-</head>
-<body>
-
-<div class="login-wrap" id="loginPage">
-  <div class="login-card">
-    <div class="logo">📖</div>
-    <h1>জীবনের পাঠশালা</h1>
-    <p class="subtitle">Admin Panel</p>
-    <label>Username</label>
-    <input id="username" type="text" placeholder="Username লিখুন">
-    <label>Password</label>
-    <input id="password" type="password" placeholder="Password লিখুন">
-    <p class="error" id="loginError">Username অথবা Password ভুল হয়েছে।</p>
-    <button class="btn btn-primary full" onclick="login()">🔐 Login</button>
-    <p class="demo">ডেমো লগইন: admin / 123456</p>
-  </div>
-</div>
-
-<div class="app" id="app">
-  <aside class="sidebar" id="sidebar">
-    <div class="side-brand"><span>📖</span> জীবনের পাঠশালা</div>
-    <a class="side-link active" href="#dashboard" onclick="showSection('dashboard')">📊 Dashboard</a>
-    <a class="side-link" href="#newpost" onclick="showSection('newpost')">✍️ নতুন পোস্ট</a>
-    <a class="side-link" href="#posts" onclick="showSection('posts')">📝 সব পোস্ট</a>
-    <button class="btn btn-danger logout" onclick="logout()">🚪 Logout</button>
-  </aside>
-
-  <main class="content">
-    <div class="topbar">
-      <div><button class="btn btn-light mobile-menu" onclick="toggleSidebar()">☰</button> <span style="margin-left:8px">Admin Panel</span></div>
-      <div>👤 <b>Admin</b></div>
-    </div>
-
-    <section id="dashboard">
-      <div class="cards">
-        <div class="stat"><div class="icon">📝</div><h3 id="totalPosts">0</h3><p>মোট পোস্ট</p></div>
-        <div class="stat"><div class="icon">🚀</div><h3 id="publishedPosts">0</h3><p>Published</p></div>
-        <div class="stat"><div class="icon">🗂️</div><h3 id="draftPosts">0</h3><p>Draft</p></div>
-      </div>
-      <div class="panel">
-        <h3>👋 স্বাগতম, Admin!</h3>
-        <p>এখান থেকে তুমি তোমার ওয়েবসাইটের পোস্ট তৈরি ও পরিচালনা করতে পারবে।</p>
-        <div class="actions"><button class="btn btn-primary" onclick="showSection('newpost')">✍️ নতুন পোস্ট তৈরি করুন</button></div>
-      </div>
-    </section>
-
-    <section id="newpost" style="display:none">
-      <div class="panel">
-        <h3>✍️ নতুন পোস্ট তৈরি করুন</h3>
-        <div class="form-grid">
-          <div class="form-full"><label>পোস্টের শিরোনাম</label><input id="title" placeholder="যেমন: সফল হওয়ার ৫টি উপায়"></div>
-          <div><label>ক্যাটাগরি</label><select id="category"><option>মোটিভেশন</option><option>দৈনন্দিন জীবন</option><option>আত্মউন্নয়ন</option><option>জ্ঞান ও শিক্ষা</option><option>ইসলামিক জীবন</option></select></div>
-          <div><label>স্ট্যাটাস</label><select id="postStatus"><option value="published">Publish</option><option value="draft">Draft</option></select></div>
-          <div class="form-full"><label>পোস্টের লেখা</label><textarea id="body" placeholder="এখানে তোমার পোস্টের বিস্তারিত লেখা লিখো..."></textarea></div>
-        </div>
-        <div class="actions"><button class="btn btn-primary" onclick="savePost()">💾 Save Post</button><button class="btn btn-light" onclick="clearForm()">🧹 Clear</button></div>
-        <div class="status" id="saveStatus">✅ পোস্ট সফলভাবে সংরক্ষণ হয়েছে!</div>
-      </div>
-    </section>
-
-    <section id="posts" style="display:none">
-      <div class="panel"><h3>📝 সব পোস্ট</h3><div class="post-list" id="postList"></div></div>
-    </section>
-  </main>
-</div>
-
-<script>
-let posts=JSON.parse(localStorage.getItem("jpl_posts")||"[]");
-
-function login(){
- const u=document.getElementById("username").value.trim();
- const p=document.getElementById("password").value;
- if(u==="admin"&&p==="123456"){
-  document.getElementById("loginPage").style.display="none";
-  document.getElementById("app").style.display="block";
-  refresh();
- }else document.getElementById("loginError").style.display="block";
-}
-function logout(){location.reload()}
-function toggleSidebar(){document.getElementById("sidebar").classList.toggle("open")}
-function showSection(id){
- ["dashboard","newpost","posts"].forEach(x=>document.getElementById(x).style.display=x===id?"block":"none");
- if(id==="posts") renderPosts();
- if(document.getElementById("sidebar").classList.contains("open")) toggleSidebar();
-}
-function savePost(){
- const title=document.getElementById("title").value.trim();
- const body=document.getElementById("body").value.trim();
- if(!title||!body){alert("শিরোনাম এবং পোস্টের লেখা পূরণ করুন।");return}
- posts.unshift({id:Date.now(),title,category:document.getElementById("category").value,body,status:document.getElementById("postStatus").value,date:new Date().toLocaleDateString("bn-BD")});
- localStorage.setItem("jpl_posts",JSON.stringify(posts));
- document.getElementById("saveStatus").style.display="block";
- clearForm();refresh();
- setTimeout(()=>document.getElementById("saveStatus").style.display="none",2500);
-}
-function clearForm(){document.getElementById("title").value="";document.getElementById("body").value=""}
-function deletePost(id){if(confirm("এই পোস্টটি মুছে ফেলবেন?")){posts=posts.filter(p=>p.id!==id);localStorage.setItem("jpl_posts",JSON.stringify(posts));refresh();renderPosts()}}
-function refresh(){
- document.getElementById("totalPosts").textContent=posts.length;
- document.getElementById("publishedPosts").textContent=posts.filter(p=>p.status==="published").length;
- document.getElementById("draftPosts").textContent=posts.filter(p=>p.status==="draft").length;
-}
-function renderPosts(){
- const box=document.getElementById("postList");
- if(!posts.length){box.innerHTML="<p>এখনও কোনো পোস্ট তৈরি করা হয়নি।</p>";return}
- box.innerHTML=posts.map(p=>`<div class="post-item"><div><h4>${p.title}</h4><small>${p.category} • ${p.date} • ${p.status}</small></div><button class="btn btn-danger" onclick="deletePost(${p.id})">🗑️ Delete</button></div>`).join("");
-}
-</script>
-</body>
-</html>
+<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>জীবনের পাঠশালা Admin</title><style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:#f1f5f9;color:#0f172a}.login{min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#0f172a,#2563eb);padding:20px}.card{background:white;border-radius:20px;padding:28px;width:100%;max-width:420px}input,textarea,select{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #cbd5e1;border-radius:10px;font:inherit}textarea{min-height:180px}.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer}.primary{background:#2563eb;color:white}.danger{background:#fee2e2;color:#b91c1c}.app{display:none}.side{position:fixed;inset:0 auto 0 0;width:240px;background:#0f172a;padding:20px;color:white}.side button{display:block;width:100%;margin:8px 0;text-align:left;background:transparent;color:#cbd5e1}.main{margin-left:240px;padding:25px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.stat,.panel{background:white;border:1px solid #e2e8f0;border-radius:16px;padding:20px;margin-bottom:20px}.stat b{font-size:2rem;display:block}.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}.post{border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin:10px 0;display:flex;justify-content:space-between;gap:12px}.hidden{display:none}@media(max-width:700px){.side{position:static;width:auto}.main{margin-left:0;padding:15px}.stats,.row{grid-template-columns:1fr}}
+</style></head><body>
+<div id="login" class="login"><div class="card"><h1 style="text-align:center">📖 জীবনের পাঠশালা</h1><p style="text-align:center;color:#64748b">Admin Panel</p><input id="email" type="email" placeholder="Admin Email"><input id="password" type="password" placeholder="Password"><button class="btn primary" style="width:100%" onclick="loginUser()">🔐 Login</button><p id="msg"></p></div></div>
+<div id="app" class="app"><aside class="side"><h2>📖 জীবনের পাঠশালা</h2><button class="btn" onclick="show('dash')">📊 Dashboard</button><button class="btn" onclick="show('new')">✍️ নতুন পোস্ট</button><button class="btn" onclick="show('all')">📝 সব পোস্ট</button><button class="btn danger" onclick="logoutUser()">🚪 Logout</button></aside><main class="main">
+<section id="dash"><h1>Dashboard</h1><div class="stats"><div class="stat">📝<b id="total">0</b>মোট পোস্ট</div><div class="stat">🚀<b id="pub">0</b>Published</div><div class="stat">🗂️<b id="draft">0</b>Draft</div></div></section>
+<section id="new" class="hidden"><div class="panel"><h2>✍️ নতুন পোস্ট</h2><input id="title" placeholder="পোস্টের শিরোনাম"><div class="row"><select id="cat"><option>মোটিভেশন</option><option>দৈনন্দিন জীবন</option><option>আত্মউন্নয়ন</option><option>শিক্ষামূলক</option><option>ইসলামিক জীবন</option></select><select id="stat"><option value="published">Publish</option><option value="draft">Draft</option></select></div><textarea id="body" placeholder="পোস্টের লেখা"></textarea><button class="btn primary" onclick="savePost()">🚀 Save / Publish</button><p id="saveMsg"></p></div></section>
+<section id="all" class="hidden"><div class="panel"><h2>📝 সব পোস্ট</h2><div id="list"></div></div></section></main></div>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import{getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+import{getFirestore,collection,addDoc,getDocs,query,orderBy,serverTimestamp,deleteDoc,doc}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+const firebaseConfig={apiKey:"PASTE_API_KEY",authDomain:"PASTE_PROJECT.firebaseapp.com",projectId:"PASTE_PROJECT_ID",storageBucket:"PASTE_PROJECT.firebasestorage.app",messagingSenderId:"PASTE_SENDER_ID",appId:"PASTE_APP_ID"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+window.loginUser=async()=>{try{await signInWithEmailAndPassword(auth,email.value,password.value)}catch(e){msg.textContent="Email অথবা Password ভুল।";msg.style.color="#b91c1c"}};
+window.logoutUser=()=>signOut(auth);
+onAuthStateChanged(auth,u=>{login.style.display=u?"none":"grid";app.style.display=u?"block":"none";if(u)load()});
+window.show=id=>{["dash","new","all"].forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id));if(id==="all")load()};
+window.savePost=async()=>{if(!title.value.trim()||!body.value.trim()){saveMsg.textContent="শিরোনাম ও লেখা পূরণ করুন";return}await addDoc(collection(db,"posts"),{title:title.value.trim(),content:body.value.trim(),category:cat.value,status:stat.value,createdAt:serverTimestamp()});saveMsg.textContent="✅ অনলাইনে সংরক্ষিত হয়েছে";title.value="";body.value="";load()};
+async function load(){const s=await getDocs(query(collection(db,"posts"),orderBy("createdAt","desc")));let a=[];s.forEach(x=>a.push({id:x.id,...x.data()}));total.textContent=a.length;pub.textContent=a.filter(x=>x.status==="published").length;draft.textContent=a.filter(x=>x.status==="draft").length;list.innerHTML=a.map(x=>`<div class="post"><div><b>${x.title}</b><br><small>${x.category} • ${x.status}</small></div><button class="btn danger" onclick="removePost('${x.id}')">Delete</button></div>`).join("")||"কোনো পোস্ট নেই"};
+window.removePost=async id=>{if(confirm("মুছে ফেলবেন?")){await deleteDoc(doc(db,"posts",id));load()}};
+</script></body></html>
