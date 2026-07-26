@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
 
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+
+<!-- Theme Color -->
 <meta name="theme-color" content="#2563eb">
 
 <title>জীবনের পাঠশালা</title>
@@ -190,6 +196,12 @@ button:hover{
     font-size:17px;
 
     outline:none;
+
+}
+
+#search::placeholder{
+
+    color:var(--muted);
 
 }
 
@@ -410,29 +422,6 @@ body.dark .tag{
 .copy-btn{
 
     background:#64748b;
-
-}
-
-
-/* SAVED */
-
-.saved-section{
-
-    margin:25px 0;
-
-    padding:20px;
-
-    border-radius:16px;
-
-    background:var(--card);
-
-    border:1px solid var(--border);
-
-}
-
-.saved-section h2{
-
-    margin-top:0;
 
 }
 
@@ -666,6 +655,8 @@ footer{
 <script type="module">
 
 
+/* FIREBASE */
+
 import {
 
     initializeApp
@@ -691,6 +682,8 @@ from
 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
 
@@ -721,14 +714,16 @@ const firebaseConfig = {
 };
 
 
+/* INITIALIZE FIREBASE */
+
 const app =
 
-initializeApp(firebaseConfig);
+    initializeApp(firebaseConfig);
 
 
 const db =
 
-getFirestore(app);
+    getFirestore(app);
 
 
 let allPosts = [];
@@ -788,11 +783,13 @@ async function loadPosts(){
 
                 a.createdAt?.toMillis?.() || 0;
 
+
             const dateB =
 
                 b.createdAt?.toMillis?.() || 0;
 
-            return dateB-dateA;
+
+            return dateB - dateA;
 
         });
 
@@ -823,7 +820,7 @@ async function loadPosts(){
 }
 
 
-/* RENDER */
+/* RENDER POSTS */
 
 function renderPosts(posts){
 
@@ -864,7 +861,13 @@ function renderPosts(posts){
 
                 <span class="tag">
 
-                    ${post.category || "সাধারণ"}
+                    ${escapeHTML(
+
+                        post.category ||
+
+                        "সাধারণ"
+
+                    )}
 
                 </span>
 
@@ -994,19 +997,20 @@ window.filterPosts = function(){
 
         allPosts.filter(post=>{
 
+
             const text =
 
                 (
 
-                    post.title +
+                    (post.title || "") +
 
                     " " +
 
-                    post.content +
+                    (post.content || "") +
 
                     " " +
 
-                    post.category
+                    (post.category || "")
 
                 )
 
@@ -1019,7 +1023,9 @@ window.filterPosts = function(){
 
                 ||
 
-                post.category === currentCategory;
+                post.category ===
+
+                currentCategory;
 
 
             return
@@ -1038,9 +1044,11 @@ window.filterPosts = function(){
 };
 
 
-/* CATEGORY */
+/* CATEGORY FILTER */
 
-window.filterCategory = function(category,button){
+window.filterCategory =
+
+function(category,button){
 
     currentCategory = category;
 
@@ -1064,7 +1072,7 @@ window.filterCategory = function(category,button){
 };
 
 
-/* SAVE */
+/* GET SAVED POSTS */
 
 function getSaved(){
 
@@ -1081,12 +1089,16 @@ function getSaved(){
 }
 
 
+/* CHECK SAVED */
+
 function isSaved(id){
 
     return getSaved().includes(id);
 
 }
 
+
+/* SAVE / REMOVE BOOKMARK */
 
 window.toggleSave = function(id){
 
@@ -1101,7 +1113,11 @@ window.toggleSave = function(id){
 
         );
 
-        alert("🔖 Saved থেকে সরানো হয়েছে");
+        alert(
+
+            "🔖 Saved থেকে সরানো হয়েছে"
+
+        );
 
     }
 
@@ -1109,7 +1125,11 @@ window.toggleSave = function(id){
 
         saved.push(id);
 
-        alert("✅ পোস্ট Saved হয়েছে");
+        alert(
+
+            "✅ পোস্ট Saved হয়েছে"
+
+        );
 
     }
 
@@ -1128,18 +1148,26 @@ window.toggleSave = function(id){
 };
 
 
-/* SHOW SAVED */
+/* SHOW SAVED POSTS */
 
 window.showSavedPosts = function(){
 
-    const savedIds = getSaved();
+    const savedIds =
+
+        getSaved();
 
 
     const savedPosts =
 
         allPosts.filter(
 
-            post=>savedIds.includes(post.id)
+            post=>
+
+            savedIds.includes(
+
+                post.id
+
+            )
 
         );
 
@@ -1158,7 +1186,7 @@ window.showSavedPosts = function(){
 };
 
 
-/* SHARE */
+/* SHARE POST */
 
 window.sharePost = async function(id){
 
@@ -1166,7 +1194,9 @@ window.sharePost = async function(id){
 
         allPosts.find(
 
-            item=>item.id === id
+            item=>
+
+            item.id === id
 
         );
 
@@ -1187,32 +1217,58 @@ window.sharePost = async function(id){
         post.content;
 
 
-    if(navigator.share){
+    if(
 
-        await navigator.share({
+        navigator.share
 
-            title:post.title,
+    ){
 
-            text:text,
+        try{
 
-            url:location.href
+            await navigator.share({
 
-        });
+                title:post.title,
+
+                text:text,
+
+                url:location.href
+
+            });
+
+        }
+
+        catch(error){
+
+            console.log(
+
+                "Share বাতিল করা হয়েছে"
+
+            );
+
+        }
 
     }
 
     else{
 
-        await navigator.clipboard.writeText(text);
+        await navigator.clipboard.writeText(
 
-        alert("📋 পোস্ট কপি হয়েছে");
+            text
+
+        );
+
+        alert(
+
+            "📋 পোস্ট কপি হয়েছে"
+
+        );
 
     }
 
 };
 
 
-/* COPY */
+/* COPY POST */
 
 window.copyPost = async function(id){
 
@@ -1220,7 +1276,9 @@ window.copyPost = async function(id){
 
         allPosts.find(
 
-            item=>item.id === id
+            item=>
+
+            item.id === id
 
         );
 
@@ -1243,12 +1301,16 @@ window.copyPost = async function(id){
     );
 
 
-    alert("📋 পোস্ট কপি হয়েছে");
+    alert(
+
+        "📋 পোস্ট কপি হয়েছে"
+
+    );
 
 };
 
 
-/* THEME */
+/* LIGHT / DARK MODE */
 
 window.toggleTheme = function(){
 
@@ -1265,20 +1327,30 @@ window.toggleTheme = function(){
 
         "theme",
 
-        document.body.classList.contains("dark")
+        document.body.classList.contains(
 
-            ? "dark"
+            "dark"
 
-            : "light"
+        )
+
+        ? "dark"
+
+        : "light"
 
     );
 
 };
 
 
+/* LOAD SAVED THEME */
+
 if(
 
-    localStorage.getItem("theme")
+    localStorage.getItem(
+
+        "theme"
+
+    )
 
     ===
 
@@ -1297,7 +1369,7 @@ if(
 }
 
 
-/* SECURITY */
+/* ESCAPE HTML */
 
 function escapeHTML(text){
 
@@ -1326,6 +1398,71 @@ function escapeHTML(text){
 }
 
 
+/* PWA SERVICE WORKER */
+
+if(
+
+    "serviceWorker"
+
+    in
+
+    navigator
+
+){
+
+    window.addEventListener(
+
+        "load",
+
+        ()=>{
+
+            navigator.serviceWorker
+
+                .register(
+
+                    "./sw.js"
+
+                )
+
+                .then(
+
+                    ()=>{
+
+                        console.log(
+
+                            "PWA চালু হয়েছে ✅"
+
+                        );
+
+                    }
+
+                )
+
+                .catch(
+
+                    error=>{
+
+                        console.log(
+
+                            "PWA চালু করা যায়নি ❌",
+
+                            error
+
+                        );
+
+                    }
+
+                );
+
+        }
+
+    );
+
+}
+
+
+/* START */
+
 loadPosts();
 
 
@@ -1333,4 +1470,4 @@ loadPosts();
 
 </body>
 
-  </html>
+    </html>
