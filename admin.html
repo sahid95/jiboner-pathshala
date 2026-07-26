@@ -7,6 +7,7 @@
 <title>জীবনের পাঠশালা — Admin Dashboard</title>
 
 <style>
+
 *{
     box-sizing:border-box;
 }
@@ -18,6 +19,8 @@ body{
     color:#1e293b;
 }
 
+/* HEADER */
+
 header{
     background:linear-gradient(135deg,#2563eb,#7c3aed);
     color:white;
@@ -26,362 +29,1047 @@ header{
 
 header h1{
     margin:0;
+    font-size:28px;
 }
 
+header p{
+    margin:6px 0 0;
+    opacity:.9;
+}
+
+/* CONTAINER */
+
 .container{
-    max-width:1100px;
+    max-width:1200px;
     margin:25px auto;
     padding:0 15px;
 }
+
+/* CARD */
 
 .card{
     background:white;
     padding:25px;
     margin-bottom:20px;
-    border-radius:16px;
+    border-radius:18px;
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
+
+/* LOGIN */
+
+.login-card{
+    max-width:450px;
+    margin:60px auto;
+}
+
+/* INPUT */
 
 input,
 textarea,
 select{
+
     width:100%;
     padding:13px;
+
     margin:8px 0 15px;
+
     border:1px solid #cbd5e1;
+
     border-radius:8px;
+
     font-size:16px;
+
+    font-family:inherit;
+
 }
 
 textarea{
+
     min-height:180px;
+
     resize:vertical;
+
 }
 
+/* BUTTON */
+
 button{
+
     padding:11px 18px;
+
     border:0;
+
     border-radius:8px;
+
     color:white;
+
     font-size:15px;
+
     cursor:pointer;
+
     margin:3px;
+
+    transition:.2s;
+
 }
 
 button:hover{
+
+    transform:translateY(-1px);
+
     opacity:.9;
+
 }
 
 .btn-blue{
+
     background:#2563eb;
+
 }
 
 .btn-green{
+
     background:#16a34a;
+
 }
 
 .btn-red{
+
     background:#dc2626;
+
+}
+
+.btn-orange{
+
+    background:#ea580c;
+
 }
 
 .btn-gray{
+
     background:#64748b;
-}
 
-.hidden{
-    display:none;
-}
-
-#message,
-#loginMessage{
-    padding:12px;
-    margin:10px 0;
-    border-radius:8px;
-}
-
-.posts-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:18px;
-}
-
-.post-card{
-    border:1px solid #e2e8f0;
-    border-radius:12px;
-    padding:18px;
-    background:#fff;
-}
-
-.post-card h3{
-    margin-top:8px;
-}
-
-.tag{
-    display:inline-block;
-    background:#dbeafe;
-    color:#1d4ed8;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:14px;
-}
-
-.status{
-    display:inline-block;
-    background:#dcfce7;
-    color:#166534;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:14px;
-}
-
-.date{
-    color:#64748b;
-    font-size:13px;
-    margin-top:10px;
 }
 
 .logout{
+
     float:right;
+
     background:#dc2626;
+
 }
 
-#editBox{
-    border:2px solid #2563eb;
+/* HIDDEN */
+
+.hidden{
+
+    display:none;
+
+}
+
+/* MESSAGE */
+
+#message,
+#loginMessage,
+#quoteMessage{
+
+    padding:12px;
+
+    margin:10px 0;
+
+    border-radius:8px;
+
+}
+
+/* STATISTICS */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(200px,1fr));
+
+    gap:18px;
+
+    margin-bottom:20px;
+
+}
+
+.stat-card{
+
+    background:white;
+
+    padding:22px;
+
+    border-radius:18px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    transition:.3s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.stat-icon{
+
+    font-size:38px;
+
+}
+
+.stat-card h3{
+
+    margin:0;
+
+    font-size:30px;
+
+}
+
+.stat-card p{
+
+    margin:5px 0 0;
+
+    color:#64748b;
+
+}
+
+/* POSTS */
+
+.posts-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:18px;
+
+}
+
+.post-card{
+
+    border:1px solid #e2e8f0;
+
+    border-radius:14px;
+
+    padding:18px;
+
+    background:#fff;
+
+    transition:.2s;
+
+}
+
+.post-card:hover{
+
+    box-shadow:0 5px 18px rgba(0,0,0,.1);
+
+    transform:translateY(-2px);
+
+}
+
+.post-card h3{
+
+    margin-top:12px;
+
+    line-height:1.5;
+
+}
+
+.post-card p{
+
+    line-height:1.7;
+
+}
+
+.tag{
+
+    display:inline-block;
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+    padding:5px 10px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+    margin-right:5px;
+
+}
+
+.status{
+
+    display:inline-block;
+
+    padding:5px 10px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+}
+
+.published{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.draft{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+.featured{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+.date{
+
+    color:#64748b;
+
+    font-size:13px;
+
+    margin-top:10px;
+
 }
 
 .no-post{
+
     text-align:center;
+
     padding:30px;
+
     color:#64748b;
+
 }
+
+/* EDIT BOX */
+
+#editBox{
+
+    border:2px solid #2563eb;
+
+}
+
+/* QUOTE */
+
+.quote-box{
+
+    background:
+
+    linear-gradient(
+
+        135deg,
+
+        #eef2ff,
+
+        #f5f3ff
+
+    );
+
+    border-left:5px solid #7c3aed;
+
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+
+    header h1{
+
+        font-size:22px;
+
+    }
+
+    .card{
+
+        padding:18px;
+
+    }
+
+    .stats-grid{
+
+        grid-template-columns:
+
+        repeat(2,1fr);
+
+    }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
+
 <header>
-    <h1>জীবনের পাঠশালা</h1>
+
+    <h1>📖 জীবনের পাঠশালা</h1>
+
     <p>Admin Dashboard</p>
+
 </header>
+
 
 <div class="container">
 
+
 <!-- LOGIN -->
-<div id="loginBox" class="card">
+
+<div
+
+    id="loginBox"
+
+    class="card login-card"
+
+>
 
     <h2>🔐 Admin Login</h2>
 
-    <input
-        type="email"
-        id="email"
-        placeholder="Admin Email"
-    >
 
     <input
-        type="password"
-        id="password"
-        placeholder="Password"
+
+        type="email"
+
+        id="email"
+
+        placeholder="Admin Email"
+
     >
+
+
+    <input
+
+        type="password"
+
+        id="password"
+
+        placeholder="Password"
+
+    >
+
 
     <button
+
         class="btn-blue"
+
         onclick="login()"
+
     >
+
         Login
+
     </button>
+
 
     <p id="loginMessage"></p>
 
 </div>
 
 
-<!-- ADMIN DASHBOARD -->
-<div id="adminPanel" class="hidden">
+<!-- ADMIN PANEL -->
 
-    <!-- CREATE POST -->
-    <div class="card">
+<div
 
-        <button
-            class="logout"
-            onclick="logout()"
-        >
-            Logout
-        </button>
+    id="adminPanel"
 
-        <h2>✍️ নতুন পোস্ট তৈরি করুন</h2>
+    class="hidden"
 
-        <div id="message"></div>
-
-        <label>পোস্টের শিরোনাম</label>
-
-        <input
-            type="text"
-            id="title"
-            placeholder="যেমন: জীবনে সফল হওয়ার ৫টি উপায়"
-        >
-
-        <label>ক্যাটাগরি</label>
-
-        <select id="category">
-
-            <option value="মোটিভেশন">
-                মোটিভেশন
-            </option>
-
-            <option value="দৈনন্দিন জীবনযাপন">
-                দৈনন্দিন জীবনযাপন
-            </option>
-
-            <option value="আত্মউন্নয়ন">
-                আত্মউন্নয়ন
-            </option>
-
-            <option value="শিক্ষামূলক">
-                শিক্ষামূলক
-            </option>
-
-            <option value="ইসলামিক">
-                ইসলামিক
-            </option>
-
-        </select>
-
-        <label>পোস্টের বিষয়বস্তু</label>
-
-        <textarea
-            id="content"
-            placeholder="এখানে আপনার পোস্ট লিখুন..."
-        ></textarea>
-
-        <label>পোস্টের স্ট্যাটাস</label>
-
-        <select id="status">
-
-            <option value="published">
-                Published — প্রকাশিত
-            </option>
-
-            <option value="draft">
-                Draft — খসড়া
-            </option>
-
-        </select>
-
-        <button
-            class="btn-green"
-            onclick="publishPost()"
-        >
-            🚀 পোস্ট সংরক্ষণ করুন
-        </button>
-
-    </div>
+>
 
 
-    <!-- EDIT POST -->
-    <div
-        id="editBox"
-        class="card hidden"
-    >
+<!-- STATISTICS -->
 
-        <h2>✏️ পোস্ট Edit করুন</h2>
-
-        <input
-            type="hidden"
-            id="editId"
-        >
-
-        <label>পোস্টের শিরোনাম</label>
-
-        <input
-            type="text"
-            id="editTitle"
-        >
-
-        <label>ক্যাটাগরি</label>
-
-        <select id="editCategory">
-
-            <option value="মোটিভেশন">
-                মোটিভেশন
-            </option>
-
-            <option value="দৈনন্দিন জীবনযাপন">
-                দৈনন্দিন জীবনযাপন
-            </option>
-
-            <option value="আত্মউন্নয়ন">
-                আত্মউন্নয়ন
-            </option>
-
-            <option value="শিক্ষামূলক">
-                শিক্ষামূলক
-            </option>
-
-            <option value="ইসলামিক">
-                ইসলামিক
-            </option>
-
-        </select>
-
-        <label>বিষয়বস্তু</label>
-
-        <textarea
-            id="editContent"
-        ></textarea>
-
-        <label>স্ট্যাটাস</label>
-
-        <select id="editStatus">
-
-            <option value="published">
-                Published
-            </option>
-
-            <option value="draft">
-                Draft
-            </option>
-
-        </select>
-
-        <button
-            class="btn-green"
-            onclick="updatePost()"
-        >
-            💾 Update করুন
-        </button>
-
-        <button
-            class="btn-gray"
-            onclick="cancelEdit()"
-        >
-            বাতিল
-        </button>
-
-    </div>
+<div class="stats-grid">
 
 
-    <!-- ALL POSTS -->
-    <div class="card">
+    <div class="stat-card">
 
-        <h2>📋 সব পোস্ট</h2>
+        <div class="stat-icon">
 
-        <input
-            type="text"
-            id="searchPost"
-            placeholder="🔍 পোস্ট খুঁজুন..."
-            oninput="searchPosts()"
-        >
+            📚
 
-        <div
-            id="postsList"
-            class="posts-grid"
-        >
+        </div>
 
-            পোস্ট লোড হচ্ছে...
+        <div>
+
+            <h3 id="totalPosts">
+
+                0
+
+            </h3>
+
+            <p>
+
+                মোট পোস্ট
+
+            </p>
 
         </div>
 
     </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+
+            ✅
+
+        </div>
+
+        <div>
+
+            <h3 id="publishedPosts">
+
+                0
+
+            </h3>
+
+            <p>
+
+                Published
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+
+            📝
+
+        </div>
+
+        <div>
+
+            <h3 id="draftPosts">
+
+                0
+
+            </h3>
+
+            <p>
+
+                Draft
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+        <div class="stat-icon">
+
+            🗂️
+
+        </div>
+
+        <div>
+
+            <h3 id="totalCategories">
+
+                0
+
+            </h3>
+
+            <p>
+
+                ক্যাটাগরি
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- QUOTE OF THE DAY -->
+
+<div class="card quote-box">
+
+
+    <h2>
+
+        💬 Quote of the Day
+
+    </h2>
+
+
+    <textarea
+
+        id="quoteText"
+
+        placeholder="আজকের অনুপ্রেরণামূলক উক্তি লিখুন..."
+
+    ></textarea>
+
+
+    <button
+
+        class="btn-orange"
+
+        onclick="saveQuote()"
+
+    >
+
+        💾 Quote Save করুন
+
+    </button>
+
+
+    <p id="quoteMessage"></p>
+
+
+</div>
+
+
+<!-- CREATE POST -->
+
+<div class="card">
+
+
+    <button
+
+        class="logout"
+
+        onclick="logout()"
+
+    >
+
+        Logout
+
+    </button>
+
+
+    <h2>
+
+        ✍️ নতুন পোস্ট তৈরি করুন
+
+    </h2>
+
+
+    <div id="message"></div>
+
+
+    <label>
+
+        পোস্টের শিরোনাম
+
+    </label>
+
+
+    <input
+
+        type="text"
+
+        id="title"
+
+        placeholder="যেমন: জীবনে সফল হওয়ার ৫টি উপায়"
+
+    >
+
+
+    <label>
+
+        ক্যাটাগরি
+
+    </label>
+
+
+    <select id="category">
+
+
+        <option value="মোটিভেশন">
+
+            মোটিভেশন
+
+        </option>
+
+
+        <option value="দৈনন্দিন জীবনযাপন">
+
+            দৈনন্দিন জীবনযাপন
+
+        </option>
+
+
+        <option value="আত্মউন্নয়ন">
+
+            আত্মউন্নয়ন
+
+        </option>
+
+
+        <option value="শিক্ষামূলক">
+
+            শিক্ষামূলক
+
+        </option>
+
+
+        <option value="ইসলামিক">
+
+            ইসলামিক
+
+        </option>
+
+
+    </select>
+
+
+    <label>
+
+        পোস্টের বিষয়বস্তু
+
+    </label>
+
+
+    <textarea
+
+        id="content"
+
+        placeholder="এখানে আপনার পোস্ট লিখুন..."
+
+    ></textarea>
+
+
+    <label>
+
+        পোস্টের স্ট্যাটাস
+
+    </label>
+
+
+    <select id="status">
+
+
+        <option value="published">
+
+            Published — প্রকাশিত
+
+        </option>
+
+
+        <option value="draft">
+
+            Draft — খসড়া
+
+        </option>
+
+
+    </select>
+
+
+    <label>
+
+        ⭐ Featured Post?
+
+    </label>
+
+
+    <select id="featured">
+
+
+        <option value="false">
+
+            না
+
+        </option>
+
+
+        <option value="true">
+
+            হ্যাঁ — Featured করুন
+
+        </option>
+
+
+    </select>
+
+
+    <button
+
+        class="btn-green"
+
+        onclick="publishPost()"
+
+    >
+
+        🚀 পোস্ট সংরক্ষণ করুন
+
+    </button>
+
+
+</div>
+
+
+<!-- EDIT POST -->
+
+<div
+
+    id="editBox"
+
+    class="card hidden"
+
+>
+
+
+    <h2>
+
+        ✏️ পোস্ট Edit করুন
+
+    </h2>
+
+
+    <input
+
+        type="hidden"
+
+        id="editId"
+
+    >
+
+
+    <label>
+
+        পোস্টের শিরোনাম
+
+    </label>
+
+
+    <input
+
+        type="text"
+
+        id="editTitle"
+
+    >
+
+
+    <label>
+
+        ক্যাটাগরি
+
+    </label>
+
+
+    <select id="editCategory">
+
+
+        <option value="মোটিভেশন">
+
+            মোটিভেশন
+
+        </option>
+
+
+        <option value="দৈনন্দিন জীবনযাপন">
+
+            দৈনন্দিন জীবনযাপন
+
+        </option>
+
+
+        <option value="আত্মউন্নয়ন">
+
+            আত্মউন্নয়ন
+
+        </option>
+
+
+        <option value="শিক্ষামূলক">
+
+            শিক্ষামূলক
+
+        </option>
+
+
+        <option value="ইসলামিক">
+
+            ইসলামিক
+
+        </option>
+
+
+    </select>
+
+
+    <label>
+
+        বিষয়বস্তু
+
+    </label>
+
+
+    <textarea
+
+        id="editContent"
+
+    ></textarea>
+
+
+    <label>
+
+        স্ট্যাটাস
+
+    </label>
+
+
+    <select id="editStatus">
+
+
+        <option value="published">
+
+            Published
+
+        </option>
+
+
+        <option value="draft">
+
+            Draft
+
+        </option>
+
+
+    </select>
+
+
+    <label>
+
+        ⭐ Featured Post?
+
+    </label>
+
+
+    <select id="editFeatured">
+
+
+        <option value="false">
+
+            না
+
+        </option>
+
+
+        <option value="true">
+
+            হ্যাঁ
+
+        </option>
+
+
+    </select>
+
+
+    <button
+
+        class="btn-green"
+
+        onclick="updatePost()"
+
+    >
+
+        💾 Update করুন
+
+    </button>
+
+
+    <button
+
+        class="btn-gray"
+
+        onclick="cancelEdit()"
+
+    >
+
+        বাতিল
+
+    </button>
+
+
+</div>
+
+
+<!-- ALL POSTS -->
+
+<div class="card">
+
+
+    <h2>
+
+        📋 সব পোস্ট
+
+    </h2>
+
+
+    <input
+
+        type="text"
+
+        id="searchPost"
+
+        placeholder="🔍 পোস্ট খুঁজুন..."
+
+        oninput="searchPosts()"
+
+    >
+
+
+    <div
+
+        id="postsList"
+
+        class="posts-grid"
+
+    >
+
+        পোস্ট লোড হচ্ছে...
+
+    </div>
+
+
+</div>
+
 
 </div>
 
@@ -390,368 +1078,786 @@ button:hover{
 
 <script type="module">
 
+
 import {
+
     initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
 
 import {
+
     getAuth,
+
     signInWithEmailAndPassword,
+
     onAuthStateChanged,
+
     signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
 import {
+
     getFirestore,
+
     collection,
+
     addDoc,
+
     getDocs,
+
     doc,
+
     updateDoc,
+
     deleteDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    serverTimestamp,
+
+    setDoc
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 const firebaseConfig = {
 
+
     apiKey:
+
     "AIzaSyDsvvY7diXkCl1UHaZ9IEc2D0U1AkAxd8U",
 
+
     authDomain:
+
     "jiboner-pathshala.firebaseapp.com",
 
+
     projectId:
+
     "jiboner-pathshala",
 
+
     storageBucket:
+
     "jiboner-pathshala.firebasestorage.app",
 
+
     messagingSenderId:
+
     "964876959034",
 
+
     appId:
+
     "1:964876959034:web:ec0c7d3f2f7ebdc8ade403",
 
+
     measurementId:
+
     "G-FCFKGRKVH3"
+
 
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
 
-const auth = getAuth(app);
+initializeApp(firebaseConfig);
 
-const db = getFirestore(app);
+
+const auth =
+
+getAuth(app);
+
+
+const db =
+
+getFirestore(app);
 
 
 let allPosts = [];
 
 
-// LOGIN
+/* LOGIN */
+
+
 window.login = async function(){
 
+
     const email =
-    document.getElementById("email").value.trim();
+
+    document
+
+    .getElementById("email")
+
+    .value
+
+    .trim();
+
 
     const password =
-    document.getElementById("password").value;
+
+    document
+
+    .getElementById("password")
+
+    .value;
+
 
     const message =
-    document.getElementById("loginMessage");
+
+    document
+
+    .getElementById("loginMessage");
 
 
     if(!email || !password){
 
+
         message.innerText =
+
         "⚠️ Email এবং Password দিন";
 
+
         return;
+
 
     }
 
 
     try{
 
+
         await signInWithEmailAndPassword(
+
             auth,
+
             email,
+
             password
+
         );
 
+
         message.innerText =
+
         "✅ Login সফল হয়েছে";
 
-    }catch(error){
-
-        message.innerText =
-        "❌ Email অথবা Password ভুল";
 
     }
+
+
+    catch(error){
+
+
+        message.innerText =
+
+        "❌ Email অথবা Password ভুল";
+
+
+    }
+
 
 };
 
 
-// AUTH STATUS
-onAuthStateChanged(auth,(user)=>{
-
-    if(user){
-
-        document
-        .getElementById("loginBox")
-        .classList
-        .add("hidden");
+/* AUTH STATUS */
 
 
-        document
-        .getElementById("adminPanel")
-        .classList
-        .remove("hidden");
+onAuthStateChanged(
+
+    auth,
+
+    (user)=>{
 
 
-        loadPosts();
-
-    }else{
-
-        document
-        .getElementById("loginBox")
-        .classList
-        .remove("hidden");
+        if(user){
 
 
-        document
-        .getElementById("adminPanel")
-        .classList
-        .add("hidden");
+            document
+
+            .getElementById("loginBox")
+
+            .classList
+
+            .add("hidden");
+
+
+            document
+
+            .getElementById("adminPanel")
+
+            .classList
+
+            .remove("hidden");
+
+
+            loadPosts();
+
+
+            loadQuote();
+
+
+        }
+
+
+        else{
+
+
+            document
+
+            .getElementById("loginBox")
+
+            .classList
+
+            .remove("hidden");
+
+
+            document
+
+            .getElementById("adminPanel")
+
+            .classList
+
+            .add("hidden");
+
+
+        }
+
 
     }
 
-});
+);
 
 
-// CREATE POST
+/* CREATE POST */
+
+
 window.publishPost = async function(){
 
+
     const title =
-    document.getElementById("title")
+
+    document
+
+    .getElementById("title")
+
     .value
+
     .trim();
 
 
     const category =
-    document.getElementById("category")
+
+    document
+
+    .getElementById("category")
+
     .value;
 
 
     const content =
-    document.getElementById("content")
+
+    document
+
+    .getElementById("content")
+
     .value
+
     .trim();
 
 
     const status =
-    document.getElementById("status")
+
+    document
+
+    .getElementById("status")
+
     .value;
 
 
+    const featured =
+
+    document
+
+    .getElementById("featured")
+
+    .value === "true";
+
+
     const message =
-    document.getElementById("message");
+
+    document
+
+    .getElementById("message");
 
 
     if(!title || !content){
 
+
         message.innerText =
+
         "⚠️ শিরোনাম এবং বিষয়বস্তু লিখুন";
 
+
         return;
+
 
     }
 
 
     try{
 
+
         await addDoc(
+
             collection(db,"posts"),
+
             {
+
 
                 title:title,
 
+
                 category:category,
+
 
                 content:content,
 
+
                 status:status,
 
+
+                featured:featured,
+
+
                 createdAt:
+
                 serverTimestamp()
 
+
             }
+
         );
 
 
         message.innerText =
+
         "✅ পোস্ট সফলভাবে সংরক্ষণ হয়েছে";
 
 
         document
+
         .getElementById("title")
-        .value="";
+
+        .value = "";
 
 
         document
+
         .getElementById("content")
-        .value="";
+
+        .value = "";
 
 
         loadPosts();
 
-    }catch(error){
-
-        message.innerText =
-        "❌ সমস্যা হয়েছে: "
-        + error.message;
 
     }
+
+
+    catch(error){
+
+
+        message.innerText =
+
+        "❌ সমস্যা হয়েছে: "
+
+        + error.message;
+
+
+    }
+
 
 };
 
 
-// LOAD POSTS
+/* LOAD POSTS */
+
+
 async function loadPosts(){
 
+
     const postsList =
-    document.getElementById("postsList");
+
+    document
+
+    .getElementById("postsList");
 
 
     postsList.innerHTML =
+
     "⏳ পোস্ট লোড হচ্ছে...";
 
 
     try{
 
+
         const snapshot =
+
         await getDocs(
+
             collection(db,"posts")
+
         );
 
 
         allPosts = [];
 
 
-        snapshot.forEach((item)=>{
+        snapshot.forEach(
 
-            allPosts.push({
-
-                id:item.id,
-
-                ...item.data()
-
-            });
-
-        });
+            (item)=>{
 
 
-        allPosts.sort((a,b)=>{
+                allPosts.push({
 
-            const dateA =
-            a.createdAt?.toMillis?.() || 0;
 
-            const dateB =
-            b.createdAt?.toMillis?.() || 0;
+                    id:item.id,
 
-            return dateB - dateA;
 
-        });
+                    ...item.data()
+
+
+                });
+
+
+            }
+
+        );
+
+
+        allPosts.sort(
+
+            (a,b)=>{
+
+
+                const dateA =
+
+                a.createdAt
+
+                ?.toMillis
+
+                ?.() || 0;
+
+
+                const dateB =
+
+                b.createdAt
+
+                ?.toMillis
+
+                ?.() || 0;
+
+
+                return dateB - dateA;
+
+
+            }
+
+        );
+
+
+        updateStatistics();
 
 
         renderPosts(allPosts);
 
 
-    }catch(error){
+    }
+
+
+    catch(error){
+
 
         postsList.innerHTML =
+
         "❌ পোস্ট লোড করা যায়নি";
 
+
     }
+
 
 }
 
 
-// RENDER POSTS
+/* STATISTICS */
+
+
+function updateStatistics(){
+
+
+    const total =
+
+    allPosts.length;
+
+
+    const published =
+
+    allPosts.filter(
+
+        post =>
+
+        post.status === "published"
+
+    ).length;
+
+
+    const draft =
+
+    allPosts.filter(
+
+        post =>
+
+        post.status === "draft"
+
+    ).length;
+
+
+    const categories =
+
+    new Set(
+
+        allPosts.map(
+
+            post =>
+
+            post.category
+
+        )
+
+    ).size;
+
+
+    document
+
+    .getElementById("totalPosts")
+
+    .innerText =
+
+    total;
+
+
+    document
+
+    .getElementById("publishedPosts")
+
+    .innerText =
+
+    published;
+
+
+    document
+
+    .getElementById("draftPosts")
+
+    .innerText =
+
+    draft;
+
+
+    document
+
+    .getElementById("totalCategories")
+
+    .innerText =
+
+    categories;
+
+
+}
+
+
+/* RENDER POSTS */
+
+
 function renderPosts(posts){
 
+
     const postsList =
-    document.getElementById("postsList");
+
+    document
+
+    .getElementById("postsList");
 
 
-    if(posts.length===0){
+    if(posts.length === 0){
+
 
         postsList.innerHTML =
+
         `<div class="no-post">
-        কোনো পোস্ট পাওয়া যায়নি
+
+            কোনো পোস্ট পাওয়া যায়নি
+
         </div>`;
 
+
         return;
+
 
     }
 
 
     postsList.innerHTML =
-    posts.map(post=>`
+
+
+    posts
+
+    .map(
+
+        post => `
+
 
         <div class="post-card">
 
+
             <span class="tag">
+
                 ${post.category || "ক্যাটাগরি নেই"}
+
             </span>
 
-            <span class="status">
-                ${post.status || "published"}
+
+            <span
+
+                class="status
+
+                ${post.status === "draft"
+
+                ? "draft"
+
+                : "published"}"
+
+            >
+
+                ${post.status === "draft"
+
+                ? "Draft"
+
+                : "Published"}
+
             </span>
+
+
+            ${post.featured
+
+            ? `
+
+            <span class="featured">
+
+                ⭐ Featured
+
+            </span>
+
+            `
+
+            : ""}
+
 
             <h3>
+
                 ${post.title || "শিরোনাম নেই"}
+
             </h3>
 
+
             <p>
+
                 ${post.content || ""}
+
             </p>
 
+
             <div class="date">
+
                 ID: ${post.id}
+
             </div>
+
 
             <br>
 
-            <button
-                class="btn-blue"
-                onclick="editPost('${post.id}')"
-            >
-                ✏️ Edit
-            </button>
 
             <button
-                class="btn-red"
-                onclick="deletePost('${post.id}')"
+
+                class="btn-blue"
+
+                onclick="editPost('${post.id}')"
+
             >
-                🗑️ Delete
+
+                ✏️ Edit
+
             </button>
+
+
+            <button
+
+                class="btn-red"
+
+                onclick="deletePost('${post.id}')"
+
+            >
+
+                🗑️ Delete
+
+            </button>
+
 
         </div>
 
-    `).join("");
+
+        `
+
+    )
+
+    .join("");
+
 
 }
 
 
-// EDIT POST
+/* EDIT */
+
+
 window.editPost = function(id){
 
+
     const post =
-    allPosts.find(item=>item.id===id);
+
+    allPosts.find(
+
+        item =>
+
+        item.id === id
+
+    );
 
 
     if(!post){
@@ -762,33 +1868,69 @@ window.editPost = function(id){
 
 
     document
+
     .getElementById("editId")
-    .value=id;
+
+    .value =
+
+    id;
 
 
     document
+
     .getElementById("editTitle")
-    .value=post.title || "";
+
+    .value =
+
+    post.title || "";
 
 
     document
+
     .getElementById("editCategory")
-    .value=post.category || "মোটিভেশন";
+
+    .value =
+
+    post.category || "মোটিভেশন";
 
 
     document
+
     .getElementById("editContent")
-    .value=post.content || "";
+
+    .value =
+
+    post.content || "";
 
 
     document
+
     .getElementById("editStatus")
-    .value=post.status || "published";
+
+    .value =
+
+    post.status || "published";
 
 
     document
+
+    .getElementById("editFeatured")
+
+    .value =
+
+    post.featured
+
+    ? "true"
+
+    : "false";
+
+
+    document
+
     .getElementById("editBox")
+
     .classList
+
     .remove("hidden");
 
 
@@ -800,81 +1942,132 @@ window.editPost = function(id){
 
     });
 
+
 };
 
 
-// UPDATE POST
+/* UPDATE */
+
+
 window.updatePost = async function(){
 
+
     const id =
+
     document
+
     .getElementById("editId")
+
     .value;
 
 
     const title =
+
     document
+
     .getElementById("editTitle")
+
     .value
+
     .trim();
 
 
     const category =
+
     document
+
     .getElementById("editCategory")
+
     .value;
 
 
     const content =
+
     document
+
     .getElementById("editContent")
+
     .value
+
     .trim();
 
 
     const status =
+
     document
+
     .getElementById("editStatus")
+
     .value;
+
+
+    const featured =
+
+    document
+
+    .getElementById("editFeatured")
+
+    .value === "true";
 
 
     if(!title || !content){
 
+
         alert(
-        "শিরোনাম এবং বিষয়বস্তু পূরণ করুন"
+
+            "শিরোনাম এবং বিষয়বস্তু পূরণ করুন"
+
         );
 
+
         return;
+
 
     }
 
 
     try{
 
+
         await updateDoc(
+
 
             doc(db,"posts",id),
 
+
             {
+
 
                 title:title,
 
+
                 category:category,
+
 
                 content:content,
 
+
                 status:status,
 
+
+                featured:featured,
+
+
                 updatedAt:
+
                 serverTimestamp()
 
+
             }
+
 
         );
 
 
         alert(
-        "✅ পোস্ট Update হয়েছে"
+
+            "✅ পোস্ট Update হয়েছে"
+
         );
 
 
@@ -884,25 +2077,39 @@ window.updatePost = async function(){
         loadPosts();
 
 
-    }catch(error){
+    }
+
+
+    catch(error){
+
 
         alert(
-        "❌ Update করা যায়নি: "
-        + error.message
+
+            "❌ Update করা যায়নি: "
+
+            + error.message
 
         );
 
+
     }
+
 
 };
 
 
-// DELETE POST
+/* DELETE */
+
+
 window.deletePost = async function(id){
 
+
     const confirmDelete =
+
     confirm(
-    "আপনি কি সত্যিই এই পোস্টটি Delete করতে চান?"
+
+        "আপনি কি সত্যিই এই পোস্টটি Delete করতে চান?"
+
     );
 
 
@@ -915,82 +2122,49 @@ window.deletePost = async function(id){
 
     try{
 
+
         await deleteDoc(
+
             doc(db,"posts",id)
+
         );
 
 
         alert(
-        "🗑️ পোস্ট Delete হয়েছে"
+
+            "🗑️ পোস্ট Delete হয়েছে"
+
         );
 
 
         loadPosts();
 
 
-    }catch(error){
+    }
+
+
+    catch(error){
+
 
         alert(
-        "❌ Delete করা যায়নি: "
-        + error.message
+
+            "❌ Delete করা যায়নি: "
+
+            + error.message
 
         );
 
+
     }
 
+
 };
 
 
-// CANCEL EDIT
+/* CANCEL EDIT */
+
+
 window.cancelEdit = function(){
 
-    document
-    .getElementById("editBox")
-    .classList
-    .add("hidden");
 
-};
-
-
-// SEARCH
-window.searchPosts = function(){
-
-    const search =
-    document
-    .getElementById("searchPost")
-    .value
-    .toLowerCase();
-
-
-    const filtered =
-    allPosts.filter(post=>
-
-        (
-            (post.title || "") +
-            " " +
-            (post.content || "") +
-            " " +
-            (post.category || "")
-        )
-        .toLowerCase()
-        .includes(search)
-
-    );
-
-
-    renderPosts(filtered);
-
-};
-
-
-// LOGOUT
-window.logout = function(){
-
-    signOut(auth);
-
-};
-
-</script>
-
-</body>
-    </html>
+    
