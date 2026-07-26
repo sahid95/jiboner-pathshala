@@ -1,242 +1,1336 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#2563eb">
+
 <title>জীবনের পাঠশালা</title>
 
 <style>
-body{
-  margin:0;
-  font-family:system-ui,"Noto Sans Bengali",sans-serif;
-  background:#f8fafc;
-  color:#0f172a
+
+:root{
+
+    --bg:#f8fafc;
+    --card:#ffffff;
+    --text:#0f172a;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --primary:#2563eb;
+    --header1:#0f172a;
+    --header2:#2563eb;
+
 }
+
+body.dark{
+
+    --bg:#0f172a;
+    --card:#1e293b;
+    --text:#f8fafc;
+    --muted:#cbd5e1;
+    --border:#334155;
+    --primary:#60a5fa;
+    --header1:#020617;
+    --header2:#1d4ed8;
+
+}
+
+*{
+
+    box-sizing:border-box;
+
+}
+
+body{
+
+    margin:0;
+
+    font-family:
+
+        Arial,
+
+        "Noto Sans Bengali",
+
+        sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    transition:.3s;
+
+}
+
+
+/* HEADER */
 
 header{
-  padding:35px 20px;
-  text-align:center;
-  background:linear-gradient(135deg,#0f172a,#2563eb);
-  color:white
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            var(--header1),
+
+            var(--header2)
+
+        );
+
+    color:white;
+
+    padding:45px 20px;
+
+    text-align:center;
+
 }
+
+header h1{
+
+    font-size:38px;
+
+    margin:0 0 12px;
+
+}
+
+header p{
+
+    font-size:18px;
+
+    margin:0;
+
+    opacity:.95;
+
+}
+
+
+/* TOP BAR */
+
+.topbar{
+
+    max-width:1100px;
+
+    margin:20px auto 0;
+
+    padding:0 15px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+}
+
+
+/* BUTTON */
+
+button{
+
+    border:0;
+
+    cursor:pointer;
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    background:var(--primary);
+
+    color:white;
+
+    transition:.2s;
+
+}
+
+button:hover{
+
+    transform:translateY(-2px);
+
+    opacity:.9;
+
+}
+
+
+/* SEARCH */
+
+.search-box{
+
+    max-width:1100px;
+
+    margin:25px auto 15px;
+
+    padding:0 15px;
+
+}
+
+#search{
+
+    width:100%;
+
+    padding:16px 20px;
+
+    border-radius:50px;
+
+    border:2px solid var(--border);
+
+    background:var(--card);
+
+    color:var(--text);
+
+    font-size:17px;
+
+    outline:none;
+
+}
+
+
+/* FILTER */
+
+.filter-box{
+
+    max-width:1100px;
+
+    margin:0 auto 25px;
+
+    padding:0 15px;
+
+    display:flex;
+
+    gap:8px;
+
+    flex-wrap:wrap;
+
+}
+
+.filter-btn{
+
+    background:var(--card);
+
+    color:var(--text);
+
+    border:1px solid var(--border);
+
+}
+
+.filter-btn.active{
+
+    background:var(--primary);
+
+    color:white;
+
+}
+
+
+/* MAIN */
 
 main{
-  max-width:1000px;
-  margin:auto;
-  padding:25px
+
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:0 15px 40px;
+
 }
 
-.search{
-  width:100%;
-  padding:14px;
-  border:1px solid #cbd5e1;
-  border-radius:999px;
-  font:inherit;
-  margin-bottom:20px;
-  box-sizing:border-box
+
+/* POSTS GRID */
+
+.posts-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(
+
+            auto-fit,
+
+            minmax(280px,1fr)
+
+        );
+
+    gap:20px;
+
 }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:18px
-}
+
+/* POST */
 
 .post{
-  background:white;
-  border:1px solid #e2e8f0;
-  border-radius:16px;
-  padding:20px
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:22px;
+
+    box-shadow:
+
+        0 5px 20px
+
+        rgba(0,0,0,.06);
+
+    transition:.3s;
+
+    position:relative;
+
 }
+
+.post:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+        0 10px 30px
+
+        rgba(0,0,0,.12);
+
+}
+
+.post h2{
+
+    line-height:1.5;
+
+    margin:15px 0 10px;
+
+}
+
+.post p{
+
+    line-height:1.8;
+
+    color:var(--muted);
+
+    white-space:pre-wrap;
+
+}
+
+
+/* TAG */
 
 .tag{
-  display:inline-block;
-  background:#dbeafe;
-  color:#1d4ed8;
-  padding:5px 10px;
-  border-radius:999px
+
+    display:inline-block;
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
 }
+
+body.dark .tag{
+
+    background:#1e3a8a;
+
+    color:#bfdbfe;
+
+}
+
+
+/* FEATURED */
+
+.featured{
+
+    display:inline-block;
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    margin-left:5px;
+
+}
+
+
+/* DATE */
 
 .date{
-  color:#64748b;
-  font-size:.85rem;
-  margin-top:15px
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-top:15px;
+
 }
 
-.error{
-  color:red;
-  background:#fee2e2;
-  padding:15px;
-  border-radius:10px
+
+/* ACTIONS */
+
+.actions{
+
+    display:flex;
+
+    gap:8px;
+
+    margin-top:18px;
+
+    flex-wrap:wrap;
+
 }
+
+.save-btn{
+
+    background:#f59e0b;
+
+}
+
+.share-btn{
+
+    background:#16a34a;
+
+}
+
+.copy-btn{
+
+    background:#64748b;
+
+}
+
+
+/* SAVED */
+
+.saved-section{
+
+    margin:25px 0;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
+}
+
+.saved-section h2{
+
+    margin-top:0;
+
+}
+
+
+/* EMPTY */
+
+.empty{
+
+    text-align:center;
+
+    padding:40px 15px;
+
+    color:var(--muted);
+
+    font-size:18px;
+
+}
+
+
+/* FOOTER */
+
+footer{
+
+    text-align:center;
+
+    padding:25px;
+
+    color:var(--muted);
+
+    border-top:1px solid var(--border);
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    header h1{
+
+        font-size:28px;
+
+    }
+
+    header p{
+
+        font-size:15px;
+
+    }
+
+    .post{
+
+        padding:18px;
+
+    }
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- HEADER -->
+
 <header>
-<h1>📖 জীবনের পাঠশালা</h1>
-<p>মোটিভেশন • দৈনন্দিন জীবনযাপন • আত্মউন্নয়ন • শিক্ষামূলক বিষয়</p>
+
+    <h1>📖 জীবনের পাঠশালা</h1>
+
+    <p>
+
+        মোটিভেশন • দৈনন্দিন জীবনযাপন •
+
+        আত্মউন্নয়ন • শিক্ষামূলক বিষয়
+
+    </p>
+
 </header>
+
+
+<!-- TOP BAR -->
+
+<div class="topbar">
+
+    <button onclick="toggleTheme()">
+
+        🌙 Light / Dark
+
+    </button>
+
+    <button onclick="showSavedPosts()">
+
+        🔖 Saved Posts
+
+    </button>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+    <input
+
+        id="search"
+
+        type="search"
+
+        placeholder="🔍 পোস্ট খুঁজুন..."
+
+        oninput="filterPosts()"
+
+    >
+
+</div>
+
+
+<!-- FILTER -->
+
+<div class="filter-box">
+
+    <button
+
+        class="filter-btn active"
+
+        onclick="filterCategory('all',this)"
+
+    >
+
+        সব
+
+    </button>
+
+    <button
+
+        class="filter-btn"
+
+        onclick="filterCategory('মোটিভেশন',this)"
+
+    >
+
+        মোটিভেশন
+
+    </button>
+
+    <button
+
+        class="filter-btn"
+
+        onclick="filterCategory('দৈনন্দিন জীবনযাপন',this)"
+
+    >
+
+        দৈনন্দিন জীবনযাপন
+
+    </button>
+
+    <button
+
+        class="filter-btn"
+
+        onclick="filterCategory('আত্মউন্নয়ন',this)"
+
+    >
+
+        আত্মউন্নয়ন
+
+    </button>
+
+    <button
+
+        class="filter-btn"
+
+        onclick="filterCategory('শিক্ষামূলক',this)"
+
+    >
+
+        শিক্ষামূলক
+
+    </button>
+
+    <button
+
+        class="filter-btn"
+
+        onclick="filterCategory('ইসলামিক',this)"
+
+    >
+
+        ইসলামিক
+
+    </button>
+
+</div>
+
+
+<!-- MAIN -->
 
 <main>
 
-<input
-id="search"
-class="search"
-placeholder="🔍 পোস্ট খুঁজুন..."
-oninput="filterPosts()">
+    <div
 
-<div id="posts" class="grid">
-পোস্ট লোড হচ্ছে...
-</div>
+        id="posts"
+
+        class="posts-grid"
+
+    >
+
+        <div class="empty">
+
+            ⏳ পোস্ট লোড হচ্ছে...
+
+        </div>
+
+    </div>
 
 </main>
 
+
+<footer>
+
+    © 2026 জীবনের পাঠশালা
+
+</footer>
+
+
 <script type="module">
 
-import {
-initializeApp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
-getFirestore,
-collection,
-getDocs,
-query,
-orderBy
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+    initializeApp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+
+    getFirestore,
+
+    collection,
+
+    getDocs
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 
 const firebaseConfig = {
 
-apiKey: "AIzaSyDsvvY7diXkCl1UHaZ9IEc2D0U1AkAxd8U",
+    apiKey:
 
-authDomain: "jiboner-pathshala.firebaseapp.com",
+    "AIzaSyDsvvY7diXkCl1UHaZ9IEc2D0U1AkAxd8U",
 
-projectId: "jiboner-pathshala",
+    authDomain:
 
-storageBucket: "jiboner-pathshala.firebasestorage.app",
+    "jiboner-pathshala.firebaseapp.com",
 
-messagingSenderId: "964876959034",
+    projectId:
 
-appId: "1:964876959034:web:ec0c7d3f2f7ebdc8ade403",
+    "jiboner-pathshala",
 
-measurementId: "G-FCFKGRKVH3"
+    storageBucket:
+
+    "jiboner-pathshala.firebasestorage.app",
+
+    messagingSenderId:
+
+    "964876959034",
+
+    appId:
+
+    "1:964876959034:web:ec0c7d3f2f7ebdc8ade403"
 
 };
 
 
-const app = initializeApp(firebaseConfig);
+const app =
 
-const db = getFirestore(app);
+initializeApp(firebaseConfig);
+
+
+const db =
+
+getFirestore(app);
+
 
 let allPosts = [];
 
+let currentCategory = "all";
+
+
+/* LOAD POSTS */
 
 async function loadPosts(){
 
-try{
+    try{
 
-const q = query(
-collection(db,"posts"),
-orderBy("createdAt","desc")
-);
+        const snapshot =
 
-const snapshot = await getDocs(q);
+            await getDocs(
 
-allPosts = [];
+                collection(db,"posts")
 
-snapshot.forEach(doc => {
+            );
 
-allPosts.push({
-id: doc.id,
-...doc.data()
-});
 
-});
+        allPosts = [];
 
-renderPosts(allPosts);
 
-}catch(error){
+        snapshot.forEach(item=>{
 
-console.error(error);
+            const data = item.data();
 
-document.getElementById("posts").innerHTML =
 
-`<div class="error">
-❌ পোস্ট লোড করা যায়নি।<br>
-${error.message}
-</div>`;
+            if(
+
+                data.status === "published"
+
+                ||
+
+                data.status === undefined
+
+            ){
+
+                allPosts.push({
+
+                    id:item.id,
+
+                    ...data
+
+                });
+
+            }
+
+        });
+
+
+        allPosts.sort((a,b)=>{
+
+            const dateA =
+
+                a.createdAt?.toMillis?.() || 0;
+
+            const dateB =
+
+                b.createdAt?.toMillis?.() || 0;
+
+            return dateB-dateA;
+
+        });
+
+
+        renderPosts(allPosts);
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        document
+
+            .getElementById("posts")
+
+            .innerHTML =
+
+            `<div class="empty">
+
+                ❌ পোস্ট লোড করা যায়নি
+
+            </div>`;
+
+    }
 
 }
 
-}
 
+/* RENDER */
 
 function renderPosts(posts){
 
-const container = document.getElementById("posts");
+    const container =
 
-if(posts.length === 0){
+        document.getElementById("posts");
 
-container.innerHTML = "কোনো পোস্ট পাওয়া যায়নি";
 
-return;
+    if(posts.length === 0){
+
+        container.innerHTML =
+
+            `<div class="empty">
+
+                কোনো পোস্ট পাওয়া যায়নি
+
+            </div>`;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+
+        posts.map(post=>{
+
+
+            const saved =
+
+                isSaved(post.id);
+
+
+            return `
+
+            <article class="post">
+
+
+                <span class="tag">
+
+                    ${post.category || "সাধারণ"}
+
+                </span>
+
+
+                ${post.featured ?
+
+                    `<span class="featured">
+
+                        ⭐ Featured
+
+                    </span>`
+
+                    : ""
+
+                }
+
+
+                <h2>
+
+                    ${escapeHTML(
+
+                        post.title ||
+
+                        "শিরোনাম নেই"
+
+                    )}
+
+                </h2>
+
+
+                <p>
+
+                    ${escapeHTML(
+
+                        post.content || ""
+
+                    )}
+
+                </p>
+
+
+                <div class="date">
+
+                    📖 জীবনের পাঠশালা
+
+                </div>
+
+
+                <div class="actions">
+
+
+                    <button
+
+                        class="save-btn"
+
+                        onclick="toggleSave('${post.id}')"
+
+                    >
+
+                        ${saved
+
+                            ? "🔖 Saved"
+
+                            : "🔖 Save"
+
+                        }
+
+                    </button>
+
+
+                    <button
+
+                        class="share-btn"
+
+                        onclick="sharePost('${post.id}')"
+
+                    >
+
+                        📤 Share
+
+                    </button>
+
+
+                    <button
+
+                        class="copy-btn"
+
+                        onclick="copyPost('${post.id}')"
+
+                    >
+
+                        📋 Copy
+
+                    </button>
+
+
+                </div>
+
+
+            </article>
+
+            `;
+
+        })
+
+        .join("");
 
 }
 
 
-container.innerHTML = posts.map(post => `
-
-<article class="post">
-
-<span class="tag">
-${post.category || "সাধারণ"}
-</span>
-
-<h2>
-${post.title || ""}
-</h2>
-
-<p>
-${post.content || ""}
-</p>
-
-<div class="date">
-📚 জীবনের পাঠশালা
-</div>
-
-</article>
-
-`).join("");
-
-}
-
+/* SEARCH */
 
 window.filterPosts = function(){
 
-const searchText =
-document.getElementById("search").value.toLowerCase();
+    const searchText =
 
-const filtered = allPosts.filter(post =>
+        document
 
-(
-(post.title || "") +
-(post.content || "") +
-(post.category || "")
-).toLowerCase().includes(searchText)
+        .getElementById("search")
 
-);
+        .value
 
-renderPosts(filtered);
+        .toLowerCase();
+
+
+    const result =
+
+        allPosts.filter(post=>{
+
+            const text =
+
+                (
+
+                    post.title +
+
+                    " " +
+
+                    post.content +
+
+                    " " +
+
+                    post.category
+
+                )
+
+                .toLowerCase();
+
+
+            const categoryMatch =
+
+                currentCategory === "all"
+
+                ||
+
+                post.category === currentCategory;
+
+
+            return
+
+                text.includes(searchText)
+
+                &&
+
+                categoryMatch;
+
+        });
+
+
+    renderPosts(result);
 
 };
+
+
+/* CATEGORY */
+
+window.filterCategory = function(category,button){
+
+    currentCategory = category;
+
+
+    document
+
+        .querySelectorAll(".filter-btn")
+
+        .forEach(btn=>{
+
+            btn.classList.remove("active");
+
+        });
+
+
+    button.classList.add("active");
+
+
+    filterPosts();
+
+};
+
+
+/* SAVE */
+
+function getSaved(){
+
+    return JSON.parse(
+
+        localStorage.getItem(
+
+            "savedPosts"
+
+        ) || "[]"
+
+    );
+
+}
+
+
+function isSaved(id){
+
+    return getSaved().includes(id);
+
+}
+
+
+window.toggleSave = function(id){
+
+    let saved = getSaved();
+
+
+    if(saved.includes(id)){
+
+        saved = saved.filter(
+
+            item=>item !== id
+
+        );
+
+        alert("🔖 Saved থেকে সরানো হয়েছে");
+
+    }
+
+    else{
+
+        saved.push(id);
+
+        alert("✅ পোস্ট Saved হয়েছে");
+
+    }
+
+
+    localStorage.setItem(
+
+        "savedPosts",
+
+        JSON.stringify(saved)
+
+    );
+
+
+    filterPosts();
+
+};
+
+
+/* SHOW SAVED */
+
+window.showSavedPosts = function(){
+
+    const savedIds = getSaved();
+
+
+    const savedPosts =
+
+        allPosts.filter(
+
+            post=>savedIds.includes(post.id)
+
+        );
+
+
+    renderPosts(savedPosts);
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+};
+
+
+/* SHARE */
+
+window.sharePost = async function(id){
+
+    const post =
+
+        allPosts.find(
+
+            item=>item.id === id
+
+        );
+
+
+    if(!post){
+
+        return;
+
+    }
+
+
+    const text =
+
+        post.title +
+
+        "\n\n" +
+
+        post.content;
+
+
+    if(navigator.share){
+
+        await navigator.share({
+
+            title:post.title,
+
+            text:text,
+
+            url:location.href
+
+        });
+
+    }
+
+    else{
+
+        await navigator.clipboard.writeText(text);
+
+        alert("📋 পোস্ট কপি হয়েছে");
+
+    }
+
+};
+
+
+/* COPY */
+
+window.copyPost = async function(id){
+
+    const post =
+
+        allPosts.find(
+
+            item=>item.id === id
+
+        );
+
+
+    if(!post){
+
+        return;
+
+    }
+
+
+    await navigator.clipboard.writeText(
+
+        post.title +
+
+        "\n\n" +
+
+        post.content
+
+    );
+
+
+    alert("📋 পোস্ট কপি হয়েছে");
+
+};
+
+
+/* THEME */
+
+window.toggleTheme = function(){
+
+    document
+
+        .body
+
+        .classList
+
+        .toggle("dark");
+
+
+    localStorage.setItem(
+
+        "theme",
+
+        document.body.classList.contains("dark")
+
+            ? "dark"
+
+            : "light"
+
+    );
+
+};
+
+
+if(
+
+    localStorage.getItem("theme")
+
+    ===
+
+    "dark"
+
+){
+
+    document
+
+        .body
+
+        .classList
+
+        .add("dark");
+
+}
+
+
+/* SECURITY */
+
+function escapeHTML(text){
+
+    return String(text)
+
+        .replace(
+
+            /[&<>"']/g,
+
+            char=>({
+
+                "&":"&amp;",
+
+                "<":"&lt;",
+
+                ">":"&gt;",
+
+                '"':"&quot;",
+
+                "'":"&#039;"
+
+            }[char])
+
+        );
+
+}
 
 
 loadPosts();
 
+
 </script>
 
 </body>
-</html>
+
+  </html>
