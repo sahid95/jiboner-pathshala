@@ -1,79 +1,148 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>জীবনের পাঠশালা — Admin Dashboard</title>
 
+
 <style>
+
+/* =========================
+   BASIC
+========================= */
 
 *{
     box-sizing:border-box;
 }
 
+
 body{
+
     margin:0;
-    font-family:Arial,"Noto Sans Bengali",sans-serif;
+
+    font-family:
+    Arial,
+    "Noto Sans Bengali",
+    sans-serif;
+
     background:#f1f5f9;
+
     color:#1e293b;
+
 }
 
-/* HEADER */
+
+/* =========================
+   HEADER
+========================= */
 
 header{
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
     color:white;
+
     padding:25px 20px;
+
 }
+
 
 header h1{
+
     margin:0;
+
     font-size:28px;
+
 }
+
 
 header p{
+
     margin:6px 0 0;
+
     opacity:.9;
+
 }
 
-/* CONTAINER */
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
+
     max-width:1200px;
+
     margin:25px auto;
+
     padding:0 15px;
+
 }
 
-/* CARD */
+
+/* =========================
+   CARD
+========================= */
 
 .card{
+
     background:white;
+
     padding:25px;
+
     margin-bottom:20px;
+
     border-radius:18px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+    box-shadow:
+    0 5px 20px
+    rgba(0,0,0,.08);
+
 }
 
-/* LOGIN */
+
+/* =========================
+   LOGIN
+========================= */
 
 .login-card{
+
     max-width:450px;
+
     margin:60px auto;
+
 }
 
-/* INPUT */
+
+/* =========================
+   INPUT
+========================= */
 
 input,
 textarea,
 select{
 
     width:100%;
+
     padding:13px;
 
     margin:8px 0 15px;
 
-    border:1px solid #cbd5e1;
+    border:
+
+    1px solid
+    #cbd5e1;
 
     border-radius:8px;
 
@@ -83,6 +152,7 @@ select{
 
 }
 
+
 textarea{
 
     min-height:180px;
@@ -91,7 +161,10 @@ textarea{
 
 }
 
-/* BUTTON */
+
+/* =========================
+   BUTTON
+========================= */
 
 button{
 
@@ -113,13 +186,16 @@ button{
 
 }
 
+
 button:hover{
 
-    transform:translateY(-1px);
+    transform:
+    translateY(-1px);
 
     opacity:.9;
 
 }
+
 
 .btn-blue{
 
@@ -127,11 +203,13 @@ button:hover{
 
 }
 
+
 .btn-green{
 
     background:#16a34a;
 
 }
+
 
 .btn-red{
 
@@ -139,17 +217,20 @@ button:hover{
 
 }
 
+
 .btn-orange{
 
     background:#ea580c;
 
 }
 
+
 .btn-gray{
 
     background:#64748b;
 
 }
+
 
 .logout{
 
@@ -159,7 +240,10 @@ button:hover{
 
 }
 
-/* HIDDEN */
+
+/* =========================
+   HIDDEN
+========================= */
 
 .hidden{
 
@@ -167,7 +251,10 @@ button:hover{
 
 }
 
-/* MESSAGE */
+
+/* =========================
+   MESSAGE
+========================= */
 
 #message,
 #loginMessage,
@@ -181,7 +268,10 @@ button:hover{
 
 }
 
-/* STATISTICS */
+
+/* =========================
+   STATISTICS
+========================= */
 
 .stats-grid{
 
@@ -189,13 +279,17 @@ button:hover{
 
     grid-template-columns:
 
-    repeat(auto-fit,minmax(200px,1fr));
+    repeat(
+        auto-fit,
+        minmax(200px,1fr)
+    );
 
     gap:18px;
 
     margin-bottom:20px;
 
 }
+
 
 .stat-card{
 
@@ -205,7 +299,10 @@ button:hover{
 
     border-radius:18px;
 
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    box-shadow:
+
+    0 5px 20px
+    rgba(0,0,0,.08);
 
     display:flex;
 
@@ -217,17 +314,21 @@ button:hover{
 
 }
 
+
 .stat-card:hover{
 
-    transform:translateY(-5px);
+    transform:
+    translateY(-5px);
 
 }
+
 
 .stat-icon{
 
     font-size:38px;
 
 }
+
 
 .stat-card h3{
 
@@ -237,6 +338,7 @@ button:hover{
 
 }
 
+
 .stat-card p{
 
     margin:5px 0 0;
@@ -245,7 +347,10 @@ button:hover{
 
 }
 
-/* POSTS */
+
+/* =========================
+   POSTS
+========================= */
 
 .posts-grid{
 
@@ -253,15 +358,22 @@ button:hover{
 
     grid-template-columns:
 
-    repeat(auto-fit,minmax(280px,1fr));
+    repeat(
+        auto-fit,
+        minmax(280px,1fr)
+    );
 
     gap:18px;
 
 }
 
+
 .post-card{
 
-    border:1px solid #e2e8f0;
+    border:
+
+    1px solid
+    #e2e8f0;
 
     border-radius:14px;
 
@@ -273,13 +385,19 @@ button:hover{
 
 }
 
+
 .post-card:hover{
 
-    box-shadow:0 5px 18px rgba(0,0,0,.1);
+    box-shadow:
 
-    transform:translateY(-2px);
+    0 5px 18px
+    rgba(0,0,0,.1);
+
+    transform:
+    translateY(-2px);
 
 }
+
 
 .post-card h3{
 
@@ -289,11 +407,13 @@ button:hover{
 
 }
 
+
 .post-card p{
 
     line-height:1.7;
 
 }
+
 
 .tag{
 
@@ -313,6 +433,7 @@ button:hover{
 
 }
 
+
 .status{
 
     display:inline-block;
@@ -325,6 +446,7 @@ button:hover{
 
 }
 
+
 .published{
 
     background:#dcfce7;
@@ -332,6 +454,7 @@ button:hover{
     color:#166534;
 
 }
+
 
 .draft{
 
@@ -341,13 +464,23 @@ button:hover{
 
 }
 
+
 .featured{
+
+    display:inline-block;
 
     background:#fef3c7;
 
     color:#92400e;
 
+    padding:5px 10px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
 }
+
 
 .date{
 
@@ -359,6 +492,7 @@ button:hover{
 
 }
 
+
 .no-post{
 
     text-align:center;
@@ -369,15 +503,24 @@ button:hover{
 
 }
 
-/* EDIT BOX */
+
+/* =========================
+   EDIT BOX
+========================= */
 
 #editBox{
 
-    border:2px solid #2563eb;
+    border:
+
+    2px solid
+    #2563eb;
 
 }
 
-/* QUOTE */
+
+/* =========================
+   QUOTE
+========================= */
 
 .quote-box{
 
@@ -393,11 +536,17 @@ button:hover{
 
     );
 
-    border-left:5px solid #7c3aed;
+    border-left:
+
+    5px solid
+    #7c3aed;
 
 }
 
-/* RESPONSIVE */
+
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:600px){
 
@@ -407,11 +556,13 @@ button:hover{
 
     }
 
+
     .card{
 
         padding:18px;
 
     }
+
 
     .stats-grid{
 
@@ -427,14 +578,24 @@ button:hover{
 
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 
 <header>
 
-    <h1>📖 জীবনের পাঠশালা</h1>
+    <h1>
+        📖 জীবনের পাঠশালা
+    </h1>
 
-    <p>Admin Dashboard</p>
+    <p>
+        Admin Dashboard
+    </p>
 
 </header>
 
@@ -442,47 +603,39 @@ button:hover{
 <div class="container">
 
 
-<!-- LOGIN -->
+<!-- =========================
+     LOGIN BOX
+========================= -->
+
 
 <div
-
     id="loginBox"
-
     class="card login-card"
-
 >
 
-    <h2>🔐 Admin Login</h2>
+
+    <h2>
+        🔐 Admin Login
+    </h2>
 
 
     <input
-
         type="email"
-
         id="email"
-
         placeholder="Admin Email"
-
     >
 
 
     <input
-
         type="password"
-
         id="password"
-
         placeholder="Password"
-
     >
 
 
     <button
-
         class="btn-blue"
-
         onclick="login()"
-
     >
 
         Login
@@ -490,47 +643,61 @@ button:hover{
     </button>
 
 
-    <p id="loginMessage"></p>
+    <p
+        id="loginMessage"
+    ></p>
+
 
 </div>
 
 
-<!-- ADMIN PANEL -->
+<!-- =========================
+     ADMIN PANEL
+========================= -->
+
 
 <div
-
     id="adminPanel"
-
     class="hidden"
-
 >
 
 
-<!-- STATISTICS -->
+<!-- =========================
+     STATISTICS
+========================= -->
 
-<div class="stats-grid">
+
+<div
+    class="stats-grid"
+>
 
 
-    <div class="stat-card">
+    <div
+        class="stat-card"
+    >
 
-        <div class="stat-icon">
+        <div
+            class="stat-icon"
+        >
 
             📚
 
         </div>
 
+
         <div>
 
-            <h3 id="totalPosts">
+            <h3
+                id="totalPosts"
+            >
 
                 0
 
             </h3>
 
+
             <p>
-
                 মোট পোস্ট
-
             </p>
 
         </div>
@@ -538,26 +705,32 @@ button:hover{
     </div>
 
 
-    <div class="stat-card">
+    <div
+        class="stat-card"
+    >
 
-        <div class="stat-icon">
+        <div
+            class="stat-icon"
+        >
 
             ✅
 
         </div>
 
+
         <div>
 
-            <h3 id="publishedPosts">
+            <h3
+                id="publishedPosts"
+            >
 
                 0
 
             </h3>
 
+
             <p>
-
                 Published
-
             </p>
 
         </div>
@@ -565,26 +738,32 @@ button:hover{
     </div>
 
 
-    <div class="stat-card">
+    <div
+        class="stat-card"
+    >
 
-        <div class="stat-icon">
+        <div
+            class="stat-icon"
+        >
 
             📝
 
         </div>
 
+
         <div>
 
-            <h3 id="draftPosts">
+            <h3
+                id="draftPosts"
+            >
 
                 0
 
             </h3>
 
+
             <p>
-
                 Draft
-
             </p>
 
         </div>
@@ -592,26 +771,32 @@ button:hover{
     </div>
 
 
-    <div class="stat-card">
+    <div
+        class="stat-card"
+    >
 
-        <div class="stat-icon">
+        <div
+            class="stat-icon"
+        >
 
             🗂️
 
         </div>
 
+
         <div>
 
-            <h3 id="totalCategories">
+            <h3
+                id="totalCategories"
+            >
 
                 0
 
             </h3>
 
+
             <p>
-
                 ক্যাটাগরি
-
             </p>
 
         </div>
@@ -622,33 +807,30 @@ button:hover{
 </div>
 
 
-<!-- QUOTE OF THE DAY -->
+<!-- =========================
+     QUOTE OF THE DAY
+========================= -->
 
-<div class="card quote-box">
+
+<div
+    class="card quote-box"
+>
 
 
     <h2>
-
         💬 Quote of the Day
-
     </h2>
 
 
     <textarea
-
         id="quoteText"
-
         placeholder="আজকের অনুপ্রেরণামূলক উক্তি লিখুন..."
-
     ></textarea>
 
 
     <button
-
         class="btn-orange"
-
         onclick="saveQuote()"
-
     >
 
         💾 Quote Save করুন
@@ -656,23 +838,27 @@ button:hover{
     </button>
 
 
-    <p id="quoteMessage"></p>
+    <p
+        id="quoteMessage"
+    ></p>
 
 
 </div>
 
 
-<!-- CREATE POST -->
+<!-- =========================
+     CREATE POST
+========================= -->
 
-<div class="card">
+
+<div
+    class="card"
+>
 
 
     <button
-
         class="logout"
-
         onclick="logout()"
-
     >
 
         Logout
@@ -681,72 +867,76 @@ button:hover{
 
 
     <h2>
-
         ✍️ নতুন পোস্ট তৈরি করুন
-
     </h2>
 
 
-    <div id="message"></div>
+    <div
+        id="message"
+    ></div>
 
 
     <label>
-
         পোস্টের শিরোনাম
-
     </label>
 
 
     <input
-
         type="text"
-
         id="title"
-
         placeholder="যেমন: জীবনে সফল হওয়ার ৫টি উপায়"
-
     >
 
 
     <label>
-
         ক্যাটাগরি
-
     </label>
 
 
-    <select id="category">
+    <select
+        id="category"
+    >
 
 
-        <option value="মোটিভেশন">
+        <option
+            value="মোটিভেশন"
+        >
 
             মোটিভেশন
 
         </option>
 
 
-        <option value="দৈনন্দিন জীবনযাপন">
+        <option
+            value="দৈনন্দিন জীবনযাপন"
+        >
 
             দৈনন্দিন জীবনযাপন
 
         </option>
 
 
-        <option value="আত্মউন্নয়ন">
+        <option
+            value="আত্মউন্নয়ন"
+        >
 
             আত্মউন্নয়ন
 
         </option>
 
 
-        <option value="শিক্ষামূলক">
+        <option
+            value="শিক্ষামূলক"
+        >
 
             শিক্ষামূলক
 
         </option>
 
 
-        <option value="ইসলামিক">
+        <option
+            value="ইসলামিক"
+        >
 
             ইসলামিক
 
@@ -757,39 +947,38 @@ button:hover{
 
 
     <label>
-
         পোস্টের বিষয়বস্তু
-
     </label>
 
 
     <textarea
-
         id="content"
-
         placeholder="এখানে আপনার পোস্ট লিখুন..."
-
     ></textarea>
 
 
     <label>
-
         পোস্টের স্ট্যাটাস
-
     </label>
 
 
-    <select id="status">
+    <select
+        id="status"
+    >
 
 
-        <option value="published">
+        <option
+            value="published"
+        >
 
             Published — প্রকাশিত
 
         </option>
 
 
-        <option value="draft">
+        <option
+            value="draft"
+        >
 
             Draft — খসড়া
 
@@ -800,23 +989,27 @@ button:hover{
 
 
     <label>
-
         ⭐ Featured Post?
-
     </label>
 
 
-    <select id="featured">
+    <select
+        id="featured"
+    >
 
 
-        <option value="false">
+        <option
+            value="false"
+        >
 
             না
 
         </option>
 
 
-        <option value="true">
+        <option
+            value="true"
+        >
 
             হ্যাঁ — Featured করুন
 
@@ -827,11 +1020,8 @@ button:hover{
 
 
     <button
-
         class="btn-green"
-
         onclick="publishPost()"
-
     >
 
         🚀 পোস্ট সংরক্ষণ করুন
@@ -842,88 +1032,88 @@ button:hover{
 </div>
 
 
-<!-- EDIT POST -->
+<!-- =========================
+     EDIT POST
+========================= -->
+
 
 <div
-
     id="editBox"
-
     class="card hidden"
-
 >
 
 
     <h2>
-
         ✏️ পোস্ট Edit করুন
-
     </h2>
 
 
     <input
-
         type="hidden"
-
         id="editId"
-
     >
 
 
     <label>
-
         পোস্টের শিরোনাম
-
     </label>
 
 
     <input
-
         type="text"
-
         id="editTitle"
-
     >
 
 
     <label>
-
         ক্যাটাগরি
-
     </label>
 
 
-    <select id="editCategory">
+    <select
+        id="editCategory"
+    >
 
 
-        <option value="মোটিভেশন">
+        <option
+            value="মোটিভেশন"
+        >
 
             মোটিভেশন
 
         </option>
 
 
-        <option value="দৈনন্দিন জীবনযাপন">
+        <option
+            value="দৈনন্দিন জীবনযাপন"
+        >
 
             দৈনন্দিন জীবনযাপন
 
         </option>
 
 
-        <option value="আত্মউন্নয়ন">
+        <option
+            value="আত্মউন্নয়ন"
+        >
 
             আত্মউন্নয়ন
 
         </option>
 
 
-        <option value="শিক্ষামূলক">
+        <option
+            value="শিক্ষামূলক"
+        >
 
             শিক্ষামূলক
 
         </option>
 
 
-        <option value="ইসলামিক">
+        <option
+            value="ইসলামিক"
+        >
 
             ইসলামিক
 
@@ -934,37 +1124,37 @@ button:hover{
 
 
     <label>
-
         বিষয়বস্তু
-
     </label>
 
 
     <textarea
-
         id="editContent"
-
     ></textarea>
 
 
     <label>
-
         স্ট্যাটাস
-
     </label>
 
 
-    <select id="editStatus">
+    <select
+        id="editStatus"
+    >
 
 
-        <option value="published">
+        <option
+            value="published"
+        >
 
             Published
 
         </option>
 
 
-        <option value="draft">
+        <option
+            value="draft"
+        >
 
             Draft
 
@@ -975,23 +1165,27 @@ button:hover{
 
 
     <label>
-
         ⭐ Featured Post?
-
     </label>
 
 
-    <select id="editFeatured">
+    <select
+        id="editFeatured"
+    >
 
 
-        <option value="false">
+        <option
+            value="false"
+        >
 
             না
 
         </option>
 
 
-        <option value="true">
+        <option
+            value="true"
+        >
 
             হ্যাঁ
 
@@ -1002,11 +1196,8 @@ button:hover{
 
 
     <button
-
         class="btn-green"
-
         onclick="updatePost()"
-
     >
 
         💾 Update করুন
@@ -1015,11 +1206,8 @@ button:hover{
 
 
     <button
-
         class="btn-gray"
-
         onclick="cancelEdit()"
-
     >
 
         বাতিল
@@ -1030,37 +1218,32 @@ button:hover{
 </div>
 
 
-<!-- ALL POSTS -->
+<!-- =========================
+     ALL POSTS
+========================= -->
 
-<div class="card">
+
+<div
+    class="card"
+>
 
 
     <h2>
-
         📋 সব পোস্ট
-
     </h2>
 
 
     <input
-
         type="text"
-
         id="searchPost"
-
         placeholder="🔍 পোস্ট খুঁজুন..."
-
         oninput="searchPosts()"
-
     >
 
 
     <div
-
         id="postsList"
-
         class="posts-grid"
-
     >
 
         পোস্ট লোড হচ্ছে...
@@ -1073,10 +1256,21 @@ button:hover{
 
 </div>
 
+
 </div>
 
 
-<script type="module">
+<!-- =========================
+     FIREBASE SCRIPT
+========================= -->
+
+
+<script
+    type="module"
+>
+
+
+/* FIREBASE APP */
 
 
 import {
@@ -1088,6 +1282,9 @@ import {
 from
 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+/* FIREBASE AUTH */
 
 
 import {
@@ -1107,6 +1304,9 @@ from
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 
+/* FIRESTORE */
+
+
 import {
 
     getFirestore,
@@ -1116,6 +1316,8 @@ import {
     addDoc,
 
     getDocs,
+
+    getDoc,
 
     doc,
 
@@ -1132,6 +1334,9 @@ import {
 from
 
 "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+/* FIREBASE CONFIG */
 
 
 const firebaseConfig = {
@@ -1171,29 +1376,30 @@ const firebaseConfig = {
 
     "G-FCFKGRKVH3"
 
-
 };
 
 
-const app =
+/* INITIALIZE */
 
+
+const app =
 initializeApp(firebaseConfig);
 
 
 const auth =
-
 getAuth(app);
 
 
 const db =
-
 getFirestore(app);
 
 
 let allPosts = [];
 
 
-/* LOGIN */
+/* =========================
+   LOGIN
+========================= */
 
 
 window.login = async function(){
@@ -1202,40 +1408,33 @@ window.login = async function(){
     const email =
 
     document
-
     .getElementById("email")
-
     .value
-
     .trim();
 
 
     const password =
 
     document
-
     .getElementById("password")
-
     .value;
 
 
     const message =
 
     document
-
     .getElementById("loginMessage");
 
 
-    if(!email || !password){
-
+    if(
+        !email ||
+        !password
+    ){
 
         message.innerText =
-
         "⚠️ Email এবং Password দিন";
 
-
         return;
-
 
     }
 
@@ -1255,7 +1454,6 @@ window.login = async function(){
 
 
         message.innerText =
-
         "✅ Login সফল হয়েছে";
 
 
@@ -1267,16 +1465,19 @@ window.login = async function(){
 
         message.innerText =
 
-        "❌ Email অথবা Password ভুল";
+        "❌ Login ব্যর্থ হয়েছে: "
+
+        + error.message;
 
 
     }
 
-
 };
 
 
-/* AUTH STATUS */
+/* =========================
+   AUTH STATUS
+========================= */
 
 
 onAuthStateChanged(
@@ -1290,20 +1491,14 @@ onAuthStateChanged(
 
 
             document
-
             .getElementById("loginBox")
-
             .classList
-
             .add("hidden");
 
 
             document
-
             .getElementById("adminPanel")
-
             .classList
-
             .remove("hidden");
 
 
@@ -1320,20 +1515,14 @@ onAuthStateChanged(
 
 
             document
-
             .getElementById("loginBox")
-
             .classList
-
             .remove("hidden");
 
 
             document
-
             .getElementById("adminPanel")
-
             .classList
-
             .add("hidden");
 
 
@@ -1345,7 +1534,9 @@ onAuthStateChanged(
 );
 
 
-/* CREATE POST */
+/* =========================
+   CREATE POST
+========================= */
 
 
 window.publishPost = async function(){
@@ -1354,69 +1545,56 @@ window.publishPost = async function(){
     const title =
 
     document
-
     .getElementById("title")
-
     .value
-
     .trim();
 
 
     const category =
 
     document
-
     .getElementById("category")
-
     .value;
 
 
     const content =
 
     document
-
     .getElementById("content")
-
     .value
-
     .trim();
 
 
     const status =
 
     document
-
     .getElementById("status")
-
     .value;
 
 
     const featured =
 
     document
-
     .getElementById("featured")
-
     .value === "true";
 
 
     const message =
 
     document
-
     .getElementById("message");
 
 
-    if(!title || !content){
-
+    if(
+        !title ||
+        !content
+    ){
 
         message.innerText =
 
         "⚠️ শিরোনাম এবং বিষয়বস্তু লিখুন";
 
-
         return;
-
 
     }
 
@@ -1426,7 +1604,10 @@ window.publishPost = async function(){
 
         await addDoc(
 
-            collection(db,"posts"),
+            collection(
+                db,
+                "posts"
+            ),
 
             {
 
@@ -1447,7 +1628,6 @@ window.publishPost = async function(){
 
 
                 createdAt:
-
                 serverTimestamp()
 
 
@@ -1462,16 +1642,12 @@ window.publishPost = async function(){
 
 
         document
-
         .getElementById("title")
-
         .value = "";
 
 
         document
-
         .getElementById("content")
-
         .value = "";
 
 
@@ -1497,7 +1673,9 @@ window.publishPost = async function(){
 };
 
 
-/* LOAD POSTS */
+/* =========================
+   LOAD POSTS
+========================= */
 
 
 async function loadPosts(){
@@ -1506,7 +1684,6 @@ async function loadPosts(){
     const postsList =
 
     document
-
     .getElementById("postsList");
 
 
@@ -1522,7 +1699,10 @@ async function loadPosts(){
 
         await getDocs(
 
-            collection(db,"posts")
+            collection(
+                db,
+                "posts"
+            )
 
         );
 
@@ -1535,16 +1715,20 @@ async function loadPosts(){
             (item)=>{
 
 
-                allPosts.push({
+                allPosts.push(
+
+                    {
 
 
-                    id:item.id,
+                        id:item.id,
 
 
-                    ...item.data()
+                        ...item.data()
 
 
-                });
+                    }
+
+                );
 
 
             }
@@ -1560,18 +1744,14 @@ async function loadPosts(){
                 const dateA =
 
                 a.createdAt
-
                 ?.toMillis
-
                 ?.() || 0;
 
 
                 const dateB =
 
                 b.createdAt
-
                 ?.toMillis
-
                 ?.() || 0;
 
 
@@ -1586,7 +1766,9 @@ async function loadPosts(){
         updateStatistics();
 
 
-        renderPosts(allPosts);
+        renderPosts(
+            allPosts
+        );
 
 
     }
@@ -1600,13 +1782,18 @@ async function loadPosts(){
         "❌ পোস্ট লোড করা যায়নি";
 
 
+        console.error(error);
+
+
     }
 
 
-}
+};
 
 
-/* STATISTICS */
+/* =========================
+   STATISTICS
+========================= */
 
 
 function updateStatistics(){
@@ -1623,7 +1810,8 @@ function updateStatistics(){
 
         post =>
 
-        post.status === "published"
+        post.status ===
+        "published"
 
     ).length;
 
@@ -1634,7 +1822,8 @@ function updateStatistics(){
 
         post =>
 
-        post.status === "draft"
+        post.status ===
+        "draft"
 
     ).length;
 
@@ -1655,45 +1844,31 @@ function updateStatistics(){
 
 
     document
-
     .getElementById("totalPosts")
-
-    .innerText =
-
-    total;
+    .innerText = total;
 
 
     document
-
     .getElementById("publishedPosts")
-
-    .innerText =
-
-    published;
+    .innerText = published;
 
 
     document
-
     .getElementById("draftPosts")
-
-    .innerText =
-
-    draft;
+    .innerText = draft;
 
 
     document
-
     .getElementById("totalCategories")
-
-    .innerText =
-
-    categories;
+    .innerText = categories;
 
 
 }
 
 
-/* RENDER POSTS */
+/* =========================
+   RENDER POSTS
+========================= */
 
 
 function renderPosts(posts){
@@ -1702,12 +1877,12 @@ function renderPosts(posts){
     const postsList =
 
     document
-
     .getElementById("postsList");
 
 
-    if(posts.length === 0){
-
+    if(
+        posts.length === 0
+    ){
 
         postsList.innerHTML =
 
@@ -1720,451 +1895,79 @@ function renderPosts(posts){
 
         return;
 
-
     }
 
 
     postsList.innerHTML =
 
 
-    posts
-
-    .map(
+    posts.map(
 
         post => `
 
 
-        <div class="post-card">
+        <div
+            class="post-card"
+        >
 
 
-            <span class="tag">
+            <span
+                class="tag"
+            >
 
-                ${post.category || "ক্যাটাগরি নেই"}
+                ${
+                    post.category
+                    ||
+                    "ক্যাটাগরি নেই"
+                }
 
             </span>
 
 
             <span
-
                 class="status
+                ${
+                    post.status ===
+                    "draft"
 
-                ${post.status === "draft"
+                    ? "draft"
 
-                ? "draft"
-
-                : "published"}"
-
+                    : "published"
+                }"
             >
 
-                ${post.status === "draft"
+                ${
+                    post.status ===
+                    "draft"
 
-                ? "Draft"
+                    ? "Draft"
 
-                : "Published"}
+                    : "Published"
+                }
 
             </span>
 
 
-            ${post.featured
+            ${
+                post.featured
 
-            ? `
+                ? `
 
-            <span class="featured">
+                <span
+                    class="featured"
+                >
 
-                ⭐ Featured
+                    ⭐ Featured
 
-            </span>
+                </span>
 
-            `
+                `
 
-            : ""}
-
-
-            <h3>
-
-                ${post.title || "শিরোনাম নেই"}
-
-            </h3>
-
-
-            <p>
-
-                ${post.content || ""}
-
-            </p>
-
-
-            <div class="date">
-
-                ID: ${post.id}
-
-            </div>
-
-
-            <br>
-
-
-            <button
-
-                class="btn-blue"
-
-                onclick="editPost('${post.id}')"
-
-            >
-
-                ✏️ Edit
-
-            </button>
-
-
-            <button
-
-                class="btn-red"
-
-                onclick="deletePost('${post.id}')"
-
-            >
-
-                🗑️ Delete
-
-            </button>
-
-
-        </div>
-
-
-        `
-
-    )
-
-    .join("");
-
-
-}
-
-
-/* EDIT */
-
-
-window.editPost = function(id){
-
-
-    const post =
-
-    allPosts.find(
-
-        item =>
-
-        item.id === id
-
-    );
-
-
-    if(!post){
-
-        return;
-
-    }
-
-
-    document
-
-    .getElementById("editId")
-
-    .value =
-
-    id;
-
-
-    document
-
-    .getElementById("editTitle")
-
-    .value =
-
-    post.title || "";
-
-
-    document
-
-    .getElementById("editCategory")
-
-    .value =
-
-    post.category || "মোটিভেশন";
-
-
-    document
-
-    .getElementById("editContent")
-
-    .value =
-
-    post.content || "";
-
-
-    document
-
-    .getElementById("editStatus")
-
-    .value =
-
-    post.status || "published";
-
-
-    document
-
-    .getElementById("editFeatured")
-
-    .value =
-
-    post.featured
-
-    ? "true"
-
-    : "false";
-
-
-    document
-
-    .getElementById("editBox")
-
-    .classList
-
-    .remove("hidden");
-
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-
-};
-
-
-/* UPDATE */
-
-
-window.updatePost = async function(){
-
-
-    const id =
-
-    document
-
-    .getElementById("editId")
-
-    .value;
-
-
-    const title =
-
-    document
-
-    .getElementById("editTitle")
-
-    .value
-
-    .trim();
-
-
-    const category =
-
-    document
-
-    .getElementById("editCategory")
-
-    .value;
-
-
-    const content =
-
-    document
-
-    .getElementById("editContent")
-
-    .value
-
-    .trim();
-
-
-    const status =
-
-    document
-
-    .getElementById("editStatus")
-
-    .value;
-
-
-    const featured =
-
-    document
-
-    .getElementById("editFeatured")
-
-    .value === "true";
-
-
-    if(!title || !content){
-
-
-        alert(
-
-            "শিরোনাম এবং বিষয়বস্তু পূরণ করুন"
-
-        );
-
-
-        return;
-
-
-    }
-
-
-    try{
-
-
-        await updateDoc(
-
-
-            doc(db,"posts",id),
-
-
-            {
-
-
-                title:title,
-
-
-                category:category,
-
-
-                content:content,
-
-
-                status:status,
-
-
-                featured:featured,
-
-
-                updatedAt:
-
-                serverTimestamp()
-
+                : ""
 
             }
 
 
-        );
+            <h3>
 
-
-        alert(
-
-            "✅ পোস্ট Update হয়েছে"
-
-        );
-
-
-        cancelEdit();
-
-
-        loadPosts();
-
-
-    }
-
-
-    catch(error){
-
-
-        alert(
-
-            "❌ Update করা যায়নি: "
-
-            + error.message
-
-        );
-
-
-    }
-
-
-};
-
-
-/* DELETE */
-
-
-window.deletePost = async function(id){
-
-
-    const confirmDelete =
-
-    confirm(
-
-        "আপনি কি সত্যিই এই পোস্টটি Delete করতে চান?"
-
-    );
-
-
-    if(!confirmDelete){
-
-        return;
-
-    }
-
-
-    try{
-
-
-        await deleteDoc(
-
-            doc(db,"posts",id)
-
-        );
-
-
-        alert(
-
-            "🗑️ পোস্ট Delete হয়েছে"
-
-        );
-
-
-        loadPosts();
-
-
-    }
-
-
-    catch(error){
-
-
-        alert(
-
-            "❌ Delete করা যায়নি: "
-
-            + error.message
-
-        );
-
-
-    }
-
-
-};
-
-
-/* CANCEL EDIT */
-
-
-window.cancelEdit = function(){
-
-
-    
+             
