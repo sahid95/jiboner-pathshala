@@ -1,22 +1,255 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>জীবনের পাঠশালা Admin</title><style>
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:#f1f5f9;color:#0f172a}.login{min-height:100vh;display:grid;place-items:center;background:linear-gradient(135deg,#0f172a,#2563eb);padding:20px}.card{background:white;border-radius:20px;padding:28px;width:100%;max-width:420px}input,textarea,select{width:100%;padding:12px;margin:7px 0 14px;border:1px solid #cbd5e1;border-radius:10px;font:inherit}textarea{min-height:180px}.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:700;cursor:pointer}.primary{background:#2563eb;color:white}.danger{background:#fee2e2;color:#b91c1c}.app{display:none}.side{position:fixed;inset:0 auto 0 0;width:240px;background:#0f172a;padding:20px;color:white}.side button{display:block;width:100%;margin:8px 0;text-align:left;background:transparent;color:#cbd5e1}.main{margin-left:240px;padding:25px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.stat,.panel{background:white;border:1px solid #e2e8f0;border-radius:16px;padding:20px;margin-bottom:20px}.stat b{font-size:2rem;display:block}.row{display:grid;grid-template-columns:1fr 1fr;gap:15px}.post{border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin:10px 0;display:flex;justify-content:space-between;gap:12px}.hidden{display:none}@media(max-width:700px){.side{position:static;width:auto}.main{margin-left:0;padding:15px}.stats,.row{grid-template-columns:1fr}}
-</style></head><body>
-<div id="login" class="login"><div class="card"><h1 style="text-align:center">📖 জীবনের পাঠশালা</h1><p style="text-align:center;color:#64748b">Admin Panel</p><input id="email" type="email" placeholder="Admin Email"><input id="password" type="password" placeholder="Password"><button class="btn primary" style="width:100%" onclick="loginUser()">🔐 Login</button><p id="msg"></p></div></div>
-<div id="app" class="app"><aside class="side"><h2>📖 জীবনের পাঠশালা</h2><button class="btn" onclick="show('dash')">📊 Dashboard</button><button class="btn" onclick="show('new')">✍️ নতুন পোস্ট</button><button class="btn" onclick="show('all')">📝 সব পোস্ট</button><button class="btn danger" onclick="logoutUser()">🚪 Logout</button></aside><main class="main">
-<section id="dash"><h1>Dashboard</h1><div class="stats"><div class="stat">📝<b id="total">0</b>মোট পোস্ট</div><div class="stat">🚀<b id="pub">0</b>Published</div><div class="stat">🗂️<b id="draft">0</b>Draft</div></div></section>
-<section id="new" class="hidden"><div class="panel"><h2>✍️ নতুন পোস্ট</h2><input id="title" placeholder="পোস্টের শিরোনাম"><div class="row"><select id="cat"><option>মোটিভেশন</option><option>দৈনন্দিন জীবন</option><option>আত্মউন্নয়ন</option><option>শিক্ষামূলক</option><option>ইসলামিক জীবন</option></select><select id="stat"><option value="published">Publish</option><option value="draft">Draft</option></select></div><textarea id="body" placeholder="পোস্টের লেখা"></textarea><button class="btn primary" onclick="savePost()">🚀 Save / Publish</button><p id="saveMsg"></p></div></section>
-<section id="all" class="hidden"><div class="panel"><h2>📝 সব পোস্ট</h2><div id="list"></div></div></section></main></div>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>জীবনের পাঠশালা — Admin Panel</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+}
+header{
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+    padding:22px;
+}
+header h1{margin:0 0 5px}
+.container{
+    max-width:900px;
+    margin:25px auto;
+    padding:0 15px;
+}
+.card{
+    background:white;
+    padding:25px;
+    margin-bottom:20px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+input,textarea,select{
+    width:100%;
+    padding:13px;
+    margin:8px 0 15px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:16px;
+}
+textarea{min-height:180px;resize:vertical}
+button{
+    padding:13px 22px;
+    border:0;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+button:hover{opacity:.9}
+.logout{background:#dc2626;float:right}
+.hidden{display:none}
+#message{
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:15px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>জীবনের পাঠশালা</h1>
+    <p>Admin Panel</p>
+</header>
+
+<div class="container">
+
+<!-- LOGIN -->
+<div id="loginBox" class="card">
+    <h2>🔐 Admin Login</h2>
+
+    <input type="email" id="email" placeholder="Admin Email">
+
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <p id="loginMessage"></p>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="hidden">
+
+    <div class="card">
+        <button class="logout" onclick="logout()">Logout</button>
+
+        <h2>✍️ নতুন পোস্ট তৈরি করুন</h2>
+
+        <div id="message"></div>
+
+        <label>পোস্টের শিরোনাম</label>
+        <input type="text" id="title" placeholder="যেমন: জীবনে সফল হওয়ার ৫টি উপায়">
+
+        <label>ক্যাটাগরি</label>
+        <select id="category">
+            <option value="মোটিভেশন">মোটিভেশন</option>
+            <option value="দৈনন্দিন জীবনযাপন">দৈনন্দিন জীবনযাপন</option>
+            <option value="আত্মউন্নয়ন">আত্মউন্নয়ন</option>
+            <option value="শিক্ষামূলক">শিক্ষামূলক</option>
+            <option value="ইসলামিক">ইসলামিক</option>
+        </select>
+
+        <label>পোস্টের বিষয়বস্তু</label>
+        <textarea id="content" placeholder="এখানে আপনার পোস্ট লিখুন..."></textarea>
+
+        <button onclick="publishPost()">🚀 পোস্ট প্রকাশ করুন</button>
+    </div>
+
+</div>
+
+</div>
+
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-import{getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-import{getFirestore,collection,addDoc,getDocs,query,orderBy,serverTimestamp,deleteDoc,doc}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-const firebaseConfig={apiKey:"PASTE_API_KEY",authDomain:"PASTE_PROJECT.firebaseapp.com",projectId:"PASTE_PROJECT_ID",storageBucket:"PASTE_PROJECT.firebasestorage.app",messagingSenderId:"PASTE_SENDER_ID",appId:"PASTE_APP_ID"};
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
-window.loginUser=async()=>{try{await signInWithEmailAndPassword(auth,email.value,password.value)}catch(e){msg.textContent="Email অথবা Password ভুল।";msg.style.color="#b91c1c"}};
-window.logoutUser=()=>signOut(auth);
-onAuthStateChanged(auth,u=>{login.style.display=u?"none":"grid";app.style.display=u?"block":"none";if(u)load()});
-window.show=id=>{["dash","new","all"].forEach(x=>document.getElementById(x).classList.toggle("hidden",x!==id));if(id==="all")load()};
-window.savePost=async()=>{if(!title.value.trim()||!body.value.trim()){saveMsg.textContent="শিরোনাম ও লেখা পূরণ করুন";return}await addDoc(collection(db,"posts"),{title:title.value.trim(),content:body.value.trim(),category:cat.value,status:stat.value,createdAt:serverTimestamp()});saveMsg.textContent="✅ অনলাইনে সংরক্ষিত হয়েছে";title.value="";body.value="";load()};
-async function load(){const s=await getDocs(query(collection(db,"posts"),orderBy("createdAt","desc")));let a=[];s.forEach(x=>a.push({id:x.id,...x.data()}));total.textContent=a.length;pub.textContent=a.filter(x=>x.status==="published").length;draft.textContent=a.filter(x=>x.status==="draft").length;list.innerHTML=a.map(x=>`<div class="post"><div><b>${x.title}</b><br><small>${x.category} • ${x.status}</small></div><button class="btn danger" onclick="removePost('${x.id}')">Delete</button></div>`).join("")||"কোনো পোস্ট নেই"};
-window.removePost=async id=>{if(confirm("মুছে ফেলবেন?")){await deleteDoc(doc(db,"posts",id));load()}};
-</script></body></html>
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+    getAuth,
+    signInWithEmailAndPassword,
+    onAuthStateChanged,
+    signOut
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyDsvvY7diXkCl1UHaZ9IEc2D0U1AkAxd8U",
+    authDomain: "jiboner-pathshala.firebaseapp.com",
+    projectId: "jiboner-pathshala",
+    storageBucket: "jiboner-pathshala.firebasestorage.app",
+    messagingSenderId: "964876959034",
+    appId: "1:964876959034:web:ec0c7d3f2f7ebdc8ade403",
+    measurementId: "G-FCFKGRKVH3"
+};
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+// LOGIN
+window.login = async function(){
+
+    const email = document.getElementById("email").value;
+
+    const password = document.getElementById("password").value;
+
+    const msg = document.getElementById("loginMessage");
+
+    try{
+
+        await signInWithEmailAndPassword(auth,email,password);
+
+        msg.innerText = "সফলভাবে Login হয়েছে ✅";
+
+    }catch(error){
+
+        msg.innerText = "Email অথবা Password ভুল ❌";
+
+    }
+
+};
+
+
+// LOGIN STATUS
+onAuthStateChanged(auth,(user)=>{
+
+    if(user){
+
+        document.getElementById("loginBox").classList.add("hidden");
+
+        document.getElementById("adminPanel").classList.remove("hidden");
+
+    }else{
+
+        document.getElementById("loginBox").classList.remove("hidden");
+
+        document.getElementById("adminPanel").classList.add("hidden");
+
+    }
+
+});
+
+
+// PUBLISH POST
+window.publishPost = async function(){
+
+    const title = document.getElementById("title").value.trim();
+
+    const category = document.getElementById("category").value;
+
+    const content = document.getElementById("content").value.trim();
+
+    const message = document.getElementById("message");
+
+    if(!title || !content){
+
+        message.innerText = "⚠️ শিরোনাম এবং পোস্টের বিষয়বস্তু লিখুন";
+
+        return;
+
+    }
+
+    try{
+
+        await addDoc(collection(db,"posts"),{
+
+            title:title,
+
+            category:category,
+
+            content:content,
+
+            createdAt:serverTimestamp()
+
+        });
+
+        message.innerText = "✅ পোস্ট সফলভাবে প্রকাশ হয়েছে!";
+
+        document.getElementById("title").value="";
+
+        document.getElementById("content").value="";
+
+    }catch(error){
+
+        message.innerText = "❌ পোস্ট প্রকাশ করা যায়নি: "+error.message;
+
+    }
+
+};
+
+
+// LOGOUT
+window.logout = function(){
+
+    signOut(auth);
+
+};
+
+</script>
+
+</body>
+  </html>
