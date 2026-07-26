@@ -1,6 +1,242 @@
-<!doctype html><html lang="bn"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>জীবনের পাঠশালা</title><style>body{margin:0;font-family:system-ui,"Noto Sans Bengali",sans-serif;background:#f8fafc;color:#0f172a}header{padding:35px 20px;text-align:center;background:linear-gradient(135deg,#0f172a,#2563eb);color:white}main{max-width:1000px;margin:auto;padding:25px}.search{width:100%;padding:14px;border:1px solid #cbd5e1;border-radius:999px;font:inherit;margin-bottom:20px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}.post{background:white;border:1px solid #e2e8f0;border-radius:16px;padding:20px}.tag{display:inline-block;background:#dbeafe;color:#1d4ed8;padding:5px 10px;border-radius:999px}.date{color:#64748b;font-size:.85rem}</style></head><body><header><h1>📖 জীবনের পাঠশালা</h1><p>মোটিভেশন • দৈনন্দিন জীবনযাপন • আত্মউন্নয়ন • শিক্ষামূলক বিষয়</p></header><main><input id="search" class="search" placeholder="🔍 পোস্ট খুঁজুন..." oninput="filterPosts()"><div id="posts" class="grid">পোস্ট লোড হচ্ছে...</div></main>
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>জীবনের পাঠশালা</title>
+
+<style>
+body{
+  margin:0;
+  font-family:system-ui,"Noto Sans Bengali",sans-serif;
+  background:#f8fafc;
+  color:#0f172a
+}
+
+header{
+  padding:35px 20px;
+  text-align:center;
+  background:linear-gradient(135deg,#0f172a,#2563eb);
+  color:white
+}
+
+main{
+  max-width:1000px;
+  margin:auto;
+  padding:25px
+}
+
+.search{
+  width:100%;
+  padding:14px;
+  border:1px solid #cbd5e1;
+  border-radius:999px;
+  font:inherit;
+  margin-bottom:20px;
+  box-sizing:border-box
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:18px
+}
+
+.post{
+  background:white;
+  border:1px solid #e2e8f0;
+  border-radius:16px;
+  padding:20px
+}
+
+.tag{
+  display:inline-block;
+  background:#dbeafe;
+  color:#1d4ed8;
+  padding:5px 10px;
+  border-radius:999px
+}
+
+.date{
+  color:#64748b;
+  font-size:.85rem;
+  margin-top:15px
+}
+
+.error{
+  color:red;
+  background:#fee2e2;
+  padding:15px;
+  border-radius:10px
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>📖 জীবনের পাঠশালা</h1>
+<p>মোটিভেশন • দৈনন্দিন জীবনযাপন • আত্মউন্নয়ন • শিক্ষামূলক বিষয়</p>
+</header>
+
+<main>
+
+<input
+id="search"
+class="search"
+placeholder="🔍 পোস্ট খুঁজুন..."
+oninput="filterPosts()">
+
+<div id="posts" class="grid">
+পোস্ট লোড হচ্ছে...
+</div>
+
+</main>
+
 <script type="module">
-import{initializeApp}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";import{getFirestore,collection,getDocs,query,where,orderBy}from"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-const firebaseConfig={apiKey:"PASTE_API_KEY",authDomain:"PASTE_PROJECT.firebaseapp.com",projectId:"PASTE_PROJECT_ID",storageBucket:"PASTE_PROJECT.firebasestorage.app",messagingSenderId:"PASTE_SENDER_ID",appId:"PASTE_APP_ID"};const app=initializeApp(firebaseConfig),db=getFirestore(app);let all=[];
-async function load(){const s=await getDocs(query(collection(db,"posts"),where("status","==","published"),orderBy("createdAt","desc")));all=[];s.forEach(x=>all.push(x.data()));render(all)}function render(a){posts.innerHTML=a.map(p=>`<article class="post"><span class="tag">${p.category}</span><h2>${p.title}</h2><p>${p.content}</p><div class="date">জীবনের পাঠশালা</div></article>`).join("")||"কোনো পোস্ট পাওয়া যায়নি"}window.filterPosts=()=>{const q=search.value.toLowerCase();render(all.filter(p=>(p.title+" "+p.content+" "+p.category).toLowerCase().includes(q)))};load();
-</script></body></html>
+
+import {
+initializeApp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs,
+query,
+orderBy
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDsvvY7diXkCl1UHaZ9IEc2D0U1AkAxd8U",
+
+authDomain: "jiboner-pathshala.firebaseapp.com",
+
+projectId: "jiboner-pathshala",
+
+storageBucket: "jiboner-pathshala.firebasestorage.app",
+
+messagingSenderId: "964876959034",
+
+appId: "1:964876959034:web:ec0c7d3f2f7ebdc8ade403",
+
+measurementId: "G-FCFKGRKVH3"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const db = getFirestore(app);
+
+let allPosts = [];
+
+
+async function loadPosts(){
+
+try{
+
+const q = query(
+collection(db,"posts"),
+orderBy("createdAt","desc")
+);
+
+const snapshot = await getDocs(q);
+
+allPosts = [];
+
+snapshot.forEach(doc => {
+
+allPosts.push({
+id: doc.id,
+...doc.data()
+});
+
+});
+
+renderPosts(allPosts);
+
+}catch(error){
+
+console.error(error);
+
+document.getElementById("posts").innerHTML =
+
+`<div class="error">
+❌ পোস্ট লোড করা যায়নি।<br>
+${error.message}
+</div>`;
+
+}
+
+}
+
+
+function renderPosts(posts){
+
+const container = document.getElementById("posts");
+
+if(posts.length === 0){
+
+container.innerHTML = "কোনো পোস্ট পাওয়া যায়নি";
+
+return;
+
+}
+
+
+container.innerHTML = posts.map(post => `
+
+<article class="post">
+
+<span class="tag">
+${post.category || "সাধারণ"}
+</span>
+
+<h2>
+${post.title || ""}
+</h2>
+
+<p>
+${post.content || ""}
+</p>
+
+<div class="date">
+📚 জীবনের পাঠশালা
+</div>
+
+</article>
+
+`).join("");
+
+}
+
+
+window.filterPosts = function(){
+
+const searchText =
+document.getElementById("search").value.toLowerCase();
+
+const filtered = allPosts.filter(post =>
+
+(
+(post.title || "") +
+(post.content || "") +
+(post.category || "")
+).toLowerCase().includes(searchText)
+
+);
+
+renderPosts(filtered);
+
+};
+
+
+loadPosts();
+
+</script>
+
+</body>
+</html>
