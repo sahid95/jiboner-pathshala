@@ -1,996 +1,300 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>জীবনের পাঠশালা — Admin Dashboard</title>
+<title>জীবনের পাঠশালা - Admin Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
 *{
-    box-sizing:border-box;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Noto Sans Bengali',sans-serif;
 }
 
 body{
-    margin:0;
-    font-family:Arial,"Noto Sans Bengali",sans-serif;
-    background:#f1f5f9;
-    color:#1e293b;
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+background:linear-gradient(135deg,#2563eb,#7c3aed);
+
 }
 
-header{
-    background:linear-gradient(135deg,#2563eb,#7c3aed);
-    color:white;
-    padding:25px 20px;
+/* Animated Background */
+
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:700px;
+
+height:700px;
+
+background:rgba(255,255,255,.08);
+
+border-radius:50%;
+
+left:-200px;
+
+top:-200px;
+
+animation:move1 10s infinite alternate;
+
 }
 
-header h1{
-    margin:0;
+body::after{
+
+content:"";
+
+position:absolute;
+
+width:500px;
+
+height:500px;
+
+background:rgba(255,255,255,.06);
+
+border-radius:50%;
+
+right:-150px;
+
+bottom:-150px;
+
+animation:move2 8s infinite alternate;
+
 }
 
-.container{
-    max-width:1100px;
-    margin:25px auto;
-    padding:0 15px;
+@keyframes move1{
+
+from{transform:translateY(0)}
+
+to{transform:translateY(80px)}
+
 }
 
-.card{
-    background:white;
-    padding:25px;
-    margin-bottom:20px;
-    border-radius:16px;
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+@keyframes move2{
+
+from{transform:translateX(0)}
+
+to{transform:translateX(-80px)}
+
 }
 
-input,
-textarea,
-select{
-    width:100%;
-    padding:13px;
-    margin:8px 0 15px;
-    border:1px solid #cbd5e1;
-    border-radius:8px;
-    font-size:16px;
+.login-card{
+
+width:420px;
+
+background:rgba(255,255,255,.12);
+
+backdrop-filter:blur(18px);
+
+padding:35px;
+
+border-radius:25px;
+
+box-shadow:0 20px 40px rgba(0,0,0,.25);
+
+z-index:5;
+
 }
 
-textarea{
-    min-height:180px;
-    resize:vertical;
+.logo{
+
+font-size:60px;
+
+text-align:center;
+
+margin-bottom:10px;
+
 }
 
-button{
-    padding:11px 18px;
-    border:0;
-    border-radius:8px;
-    color:white;
-    font-size:15px;
-    cursor:pointer;
-    margin:3px;
+h1{
+
+text-align:center;
+
+color:#fff;
+
+margin-bottom:5px;
+
 }
 
-button:hover{
-    opacity:.9;
+.subtitle{
+
+text-align:center;
+
+color:#e5e7eb;
+
+margin-bottom:30px;
+
 }
 
-.btn-blue{
-    background:#2563eb;
+.input-box{
+
+margin-bottom:18px;
+
 }
 
-.btn-green{
-    background:#16a34a;
+.input-box label{
+
+display:block;
+
+color:#fff;
+
+margin-bottom:8px;
+
 }
 
-.btn-red{
-    background:#dc2626;
+.input-box input{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:16px;
+
+outline:none;
+
 }
 
-.btn-gray{
-    background:#64748b;
+.password-box{
+
+position:relative;
+
 }
 
-.hidden{
-    display:none;
+.toggle-password{
+
+position:absolute;
+
+right:12px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+cursor:pointer;
+
+font-size:18px;
+
 }
 
-#message,
+.login-btn{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+border-radius:12px;
+
+background:#10b981;
+
+color:white;
+
+font-size:18px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.login-btn:hover{
+
+transform:scale(1.03);
+
+}
+
 #loginMessage{
-    padding:12px;
-    margin:10px 0;
-    border-radius:8px;
+
+margin-top:15px;
+
+text-align:center;
+
+color:#fff;
+
+font-weight:bold;
+
 }
 
-.posts-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:18px;
-}
-
-.post-card{
-    border:1px solid #e2e8f0;
-    border-radius:12px;
-    padding:18px;
-    background:#fff;
-}
-
-.post-card h3{
-    margin-top:8px;
-}
-
-.tag{
-    display:inline-block;
-    background:#dbeafe;
-    color:#1d4ed8;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:14px;
-}
-
-.status{
-    display:inline-block;
-    background:#dcfce7;
-    color:#166534;
-    padding:5px 10px;
-    border-radius:20px;
-    font-size:14px;
-}
-
-.date{
-    color:#64748b;
-    font-size:13px;
-    margin-top:10px;
-}
-
-.logout{
-    float:right;
-    background:#dc2626;
-}
-
-#editBox{
-    border:2px solid #2563eb;
-}
-
-.no-post{
-    text-align:center;
-    padding:30px;
-    color:#64748b;
-}
 </style>
+
 </head>
 
 <body>
 
-<header>
-    <h1>জীবনের পাঠশালা</h1>
-    <p>Admin Dashboard</p>
-</header>
+<div class="login-card">
 
-<div class="container">
+<div class="logo">📖</div>
 
-<!-- LOGIN -->
-<div id="loginBox" class="card">
+<h1>জীবনের পাঠশালা</h1>
 
-    <h2>🔐 Admin Login</h2>
+<p class="subtitle">Admin Login</p>
 
-    <input
-        type="email"
-        id="email"
-        placeholder="Admin Email"
-    >
+<div class="input-box">
 
-    <input
-        type="password"
-        id="password"
-        placeholder="Password"
-    >
+<label>Email</label>
 
-    <button
-        class="btn-blue"
-        onclick="login()"
-    >
-        Login
-    </button>
-
-    <p id="loginMessage"></p>
+<input type="email" id="email" placeholder="admin@email.com">
 
 </div>
 
+<div class="input-box">
 
-<!-- ADMIN DASHBOARD -->
-<div id="adminPanel" class="hidden">
+<label>Password</label>
 
-    <!-- CREATE POST -->
-    <div class="card">
+<div class="password-box">
 
-        <button
-            class="logout"
-            onclick="logout()"
-        >
-            Logout
-        </button>
+<input type="password" id="password" placeholder="********">
 
-        <h2>✍️ নতুন পোস্ট তৈরি করুন</h2>
-
-        <div id="message"></div>
-
-        <label>পোস্টের শিরোনাম</label>
-
-        <input
-            type="text"
-            id="title"
-            placeholder="যেমন: জীবনে সফল হওয়ার ৫টি উপায়"
-        >
-
-        <label>ক্যাটাগরি</label>
-
-        <select id="category">
-
-            <option value="মোটিভেশন">
-                মোটিভেশন
-            </option>
-
-            <option value="দৈনন্দিন জীবনযাপন">
-                দৈনন্দিন জীবনযাপন
-            </option>
-
-            <option value="আত্মউন্নয়ন">
-                আত্মউন্নয়ন
-            </option>
-
-            <option value="শিক্ষামূলক">
-                শিক্ষামূলক
-            </option>
-
-            <option value="ইসলামিক">
-                ইসলামিক
-            </option>
-
-        </select>
-
-        <label>পোস্টের বিষয়বস্তু</label>
-
-        <textarea
-            id="content"
-            placeholder="এখানে আপনার পোস্ট লিখুন..."
-        ></textarea>
-
-        <label>পোস্টের স্ট্যাটাস</label>
-
-        <select id="status">
-
-            <option value="published">
-                Published — প্রকাশিত
-            </option>
-
-            <option value="draft">
-                Draft — খসড়া
-            </option>
-
-        </select>
-
-        <button
-            class="btn-green"
-            onclick="publishPost()"
-        >
-            🚀 পোস্ট সংরক্ষণ করুন
-        </button>
-
-    </div>
-
-
-    <!-- EDIT POST -->
-    <div
-        id="editBox"
-        class="card hidden"
-    >
-
-        <h2>✏️ পোস্ট Edit করুন</h2>
-
-        <input
-            type="hidden"
-            id="editId"
-        >
-
-        <label>পোস্টের শিরোনাম</label>
-
-        <input
-            type="text"
-            id="editTitle"
-        >
-
-        <label>ক্যাটাগরি</label>
-
-        <select id="editCategory">
-
-            <option value="মোটিভেশন">
-                মোটিভেশন
-            </option>
-
-            <option value="দৈনন্দিন জীবনযাপন">
-                দৈনন্দিন জীবনযাপন
-            </option>
-
-            <option value="আত্মউন্নয়ন">
-                আত্মউন্নয়ন
-            </option>
-
-            <option value="শিক্ষামূলক">
-                শিক্ষামূলক
-            </option>
-
-            <option value="ইসলামিক">
-                ইসলামিক
-            </option>
-
-        </select>
-
-        <label>বিষয়বস্তু</label>
-
-        <textarea
-            id="editContent"
-        ></textarea>
-
-        <label>স্ট্যাটাস</label>
-
-        <select id="editStatus">
-
-            <option value="published">
-                Published
-            </option>
-
-            <option value="draft">
-                Draft
-            </option>
-
-        </select>
-
-        <button
-            class="btn-green"
-            onclick="updatePost()"
-        >
-            💾 Update করুন
-        </button>
-
-        <button
-            class="btn-gray"
-            onclick="cancelEdit()"
-        >
-            বাতিল
-        </button>
-
-    </div>
-
-
-    <!-- ALL POSTS -->
-    <div class="card">
-
-        <h2>📋 সব পোস্ট</h2>
-
-        <input
-            type="text"
-            id="searchPost"
-            placeholder="🔍 পোস্ট খুঁজুন..."
-            oninput="searchPosts()"
-        >
-
-        <div
-            id="postsList"
-            class="posts-grid"
-        >
-
-            পোস্ট লোড হচ্ছে...
-
-        </div>
-
-    </div>
+<span class="toggle-password" onclick="togglePassword()">👁️</span>
 
 </div>
 
 </div>
 
+<button class="login-btn" onclick="login()">
 
-<script type="module">
+🔐 Login
 
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+</button>
 
+<p id="loginMessage"></p>
 
-import {
-    getAuth,
-    signInWithEmailAndPassword,
-    onAuthStateChanged,
-    signOut
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+</div>
 
+<script>
 
-import {
-    getFirestore,
-    collection,
-    addDoc,
-    getDocs,
-    doc,
-    updateDoc,
-    deleteDoc,
-    serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+function togglePassword(){
 
+const p=document.getElementById("password");
 
-const firebaseConfig = {
-
-    apiKey:
-    "AIzaSyDsvvY7diXkCl1UHaZ9IEc2D0U1AkAxd8U",
-
-    authDomain:
-    "jiboner-pathshala.firebaseapp.com",
-
-    projectId:
-    "jiboner-pathshala",
-
-    storageBucket:
-    "jiboner-pathshala.firebasestorage.app",
-
-    messagingSenderId:
-    "964876959034",
-
-    appId:
-    "1:964876959034:web:ec0c7d3f2f7ebdc8ade403",
-
-    measurementId:
-    "G-FCFKGRKVH3"
-
-};
-
-
-const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
-
-const db = getFirestore(app);
-
-
-let allPosts = [];
-
-
-// LOGIN
-window.login = async function(){
-
-    const email =
-    document.getElementById("email").value.trim();
-
-    const password =
-    document.getElementById("password").value;
-
-    const message =
-    document.getElementById("loginMessage");
-
-
-    if(!email || !password){
-
-        message.innerText =
-        "⚠️ Email এবং Password দিন";
-
-        return;
-
-    }
-
-
-    try{
-
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-        message.innerText =
-        "✅ Login সফল হয়েছে";
-
-    }catch(error){
-
-        message.innerText =
-        "❌ Email অথবা Password ভুল";
-
-    }
-
-};
-
-
-// AUTH STATUS
-onAuthStateChanged(auth,(user)=>{
-
-    if(user){
-
-        document
-        .getElementById("loginBox")
-        .classList
-        .add("hidden");
-
-
-        document
-        .getElementById("adminPanel")
-        .classList
-        .remove("hidden");
-
-
-        loadPosts();
-
-    }else{
-
-        document
-        .getElementById("loginBox")
-        .classList
-        .remove("hidden");
-
-
-        document
-        .getElementById("adminPanel")
-        .classList
-        .add("hidden");
-
-    }
-
-});
-
-
-// CREATE POST
-window.publishPost = async function(){
-
-    const title =
-    document.getElementById("title")
-    .value
-    .trim();
-
-
-    const category =
-    document.getElementById("category")
-    .value;
-
-
-    const content =
-    document.getElementById("content")
-    .value
-    .trim();
-
-
-    const status =
-    document.getElementById("status")
-    .value;
-
-
-    const message =
-    document.getElementById("message");
-
-
-    if(!title || !content){
-
-        message.innerText =
-        "⚠️ শিরোনাম এবং বিষয়বস্তু লিখুন";
-
-        return;
-
-    }
-
-
-    try{
-
-        await addDoc(
-            collection(db,"posts"),
-            {
-
-                title:title,
-
-                category:category,
-
-                content:content,
-
-                status:status,
-
-                createdAt:
-                serverTimestamp()
-
-            }
-        );
-
-
-        message.innerText =
-        "✅ পোস্ট সফলভাবে সংরক্ষণ হয়েছে";
-
-
-        document
-        .getElementById("title")
-        .value="";
-
-
-        document
-        .getElementById("content")
-        .value="";
-
-
-        loadPosts();
-
-    }catch(error){
-
-        message.innerText =
-        "❌ সমস্যা হয়েছে: "
-        + error.message;
-
-    }
-
-};
-
-
-// LOAD POSTS
-async function loadPosts(){
-
-    const postsList =
-    document.getElementById("postsList");
-
-
-    postsList.innerHTML =
-    "⏳ পোস্ট লোড হচ্ছে...";
-
-
-    try{
-
-        const snapshot =
-        await getDocs(
-            collection(db,"posts")
-        );
-
-
-        allPosts = [];
-
-
-        snapshot.forEach((item)=>{
-
-            allPosts.push({
-
-                id:item.id,
-
-                ...item.data()
-
-            });
-
-        });
-
-
-        allPosts.sort((a,b)=>{
-
-            const dateA =
-            a.createdAt?.toMillis?.() || 0;
-
-            const dateB =
-            b.createdAt?.toMillis?.() || 0;
-
-            return dateB - dateA;
-
-        });
-
-
-        renderPosts(allPosts);
-
-
-    }catch(error){
-
-        postsList.innerHTML =
-        "❌ পোস্ট লোড করা যায়নি";
-
-    }
+p.type=p.type==="password"?"text":"password";
 
 }
-
-
-// RENDER POSTS
-function renderPosts(posts){
-
-    const postsList =
-    document.getElementById("postsList");
-
-
-    if(posts.length===0){
-
-        postsList.innerHTML =
-        `<div class="no-post">
-        কোনো পোস্ট পাওয়া যায়নি
-        </div>`;
-
-        return;
-
-    }
-
-
-    postsList.innerHTML =
-    posts.map(post=>`
-
-        <div class="post-card">
-
-            <span class="tag">
-                ${post.category || "ক্যাটাগরি নেই"}
-            </span>
-
-            <span class="status">
-                ${post.status || "published"}
-            </span>
-
-            <h3>
-                ${post.title || "শিরোনাম নেই"}
-            </h3>
-
-            <p>
-                ${post.content || ""}
-            </p>
-
-            <div class="date">
-                ID: ${post.id}
-            </div>
-
-            <br>
-
-            <button
-                class="btn-blue"
-                onclick="editPost('${post.id}')"
-            >
-                ✏️ Edit
-            </button>
-
-            <button
-                class="btn-red"
-                onclick="deletePost('${post.id}')"
-            >
-                🗑️ Delete
-            </button>
-
-        </div>
-
-    `).join("");
-
-}
-
-
-// EDIT POST
-window.editPost = function(id){
-
-    const post =
-    allPosts.find(item=>item.id===id);
-
-
-    if(!post){
-
-        return;
-
-    }
-
-
-    document
-    .getElementById("editId")
-    .value=id;
-
-
-    document
-    .getElementById("editTitle")
-    .value=post.title || "";
-
-
-    document
-    .getElementById("editCategory")
-    .value=post.category || "মোটিভেশন";
-
-
-    document
-    .getElementById("editContent")
-    .value=post.content || "";
-
-
-    document
-    .getElementById("editStatus")
-    .value=post.status || "published";
-
-
-    document
-    .getElementById("editBox")
-    .classList
-    .remove("hidden");
-
-
-    window.scrollTo({
-
-        top:0,
-
-        behavior:"smooth"
-
-    });
-
-};
-
-
-// UPDATE POST
-window.updatePost = async function(){
-
-    const id =
-    document
-    .getElementById("editId")
-    .value;
-
-
-    const title =
-    document
-    .getElementById("editTitle")
-    .value
-    .trim();
-
-
-    const category =
-    document
-    .getElementById("editCategory")
-    .value;
-
-
-    const content =
-    document
-    .getElementById("editContent")
-    .value
-    .trim();
-
-
-    const status =
-    document
-    .getElementById("editStatus")
-    .value;
-
-
-    if(!title || !content){
-
-        alert(
-        "শিরোনাম এবং বিষয়বস্তু পূরণ করুন"
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        await updateDoc(
-
-            doc(db,"posts",id),
-
-            {
-
-                title:title,
-
-                category:category,
-
-                content:content,
-
-                status:status,
-
-                updatedAt:
-                serverTimestamp()
-
-            }
-
-        );
-
-
-        alert(
-        "✅ পোস্ট Update হয়েছে"
-        );
-
-
-        cancelEdit();
-
-
-        loadPosts();
-
-
-    }catch(error){
-
-        alert(
-        "❌ Update করা যায়নি: "
-        + error.message
-
-        );
-
-    }
-
-};
-
-
-// DELETE POST
-window.deletePost = async function(id){
-
-    const confirmDelete =
-    confirm(
-    "আপনি কি সত্যিই এই পোস্টটি Delete করতে চান?"
-    );
-
-
-    if(!confirmDelete){
-
-        return;
-
-    }
-
-
-    try{
-
-        await deleteDoc(
-            doc(db,"posts",id)
-        );
-
-
-        alert(
-        "🗑️ পোস্ট Delete হয়েছে"
-        );
-
-
-        loadPosts();
-
-
-    }catch(error){
-
-        alert(
-        "❌ Delete করা যায়নি: "
-        + error.message
-
-        );
-
-    }
-
-};
-
-
-// CANCEL EDIT
-window.cancelEdit = function(){
-
-    document
-    .getElementById("editBox")
-    .classList
-    .add("hidden");
-
-};
-
-
-// SEARCH
-window.searchPosts = function(){
-
-    const search =
-    document
-    .getElementById("searchPost")
-    .value
-    .toLowerCase();
-
-
-    const filtered =
-    allPosts.filter(post=>
-
-        (
-            (post.title || "") +
-            " " +
-            (post.content || "") +
-            " " +
-            (post.category || "")
-        )
-        .toLowerCase()
-        .includes(search)
-
-    );
-
-
-    renderPosts(filtered);
-
-};
-
-
-// LOGOUT
-window.logout = function(){
-
-    signOut(auth);
-
-};
 
 </script>
 
 </body>
-   </html>
+</html>
