@@ -1,69 +1,494 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>জীবনের পাঠশালা - Admin</title>
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
 
-<link rel="stylesheet" href="style.css">
+<title>
+
+জীবনের পাঠশালা
+Admin Dashboard
+
+</title>
+
+<link
+rel="stylesheet"
+href="style.css">
 
 </head>
 
 <body>
 
-<!-- Login Section -->
-<div id="loginSection" class="login-wrapper">
+<!-- LOGIN -->
 
-<div class="login-card">
+<div
+id="loginPage"
+class="login-page">
 
-<div class="logo">📖</div>
+<div
+class="login-card">
 
-<h1>জীবনের পাঠশালা</h1>
+<h1>
 
-<p>Admin Login</p>
+📖 জীবনের পাঠশালা
 
-<div class="input-group">
-<label>Email</label>
-<input type="email" id="email">
+</h1>
+
+<p>
+
+Admin Login
+
+</p>
+
+<input
+
+type="email"
+
+id="email"
+
+placeholder="Email"
+
+>
+
+<div
+class="password-box">
+
+<input
+
+type="password"
+
+id="password"
+
+placeholder="Password"
+
+>
+
+<button
+
+id="togglePassword"
+
+type="button">
+
+👁
+
+</button>
+
 </div>
 
-<div class="input-group">
-<label>Password</label>
+<button
 
-<div class="password-box">
-<input type="password" id="password">
+id="loginBtn">
 
-<span class="toggle-password"
-onclick="togglePassword()">
-👁️
+Login
+
+</button>
+
+<p
+id="loginMessage">
+
+</p>
+
+</div>
+
+</div>
+
+<!-- DASHBOARD -->
+
+<div
+
+id="dashboard"
+
+class="hidden">
+  <!-- SIDEBAR -->
+
+<div class="sidebar">
+
+<h2>📖 জীবনের পাঠশালা</h2>
+
+<ul>
+
+<li class="active">🏠 Dashboard</li>
+
+<li>📝 নতুন পোস্ট</li>
+
+<li>📚 সকল পোস্ট</li>
+
+<li>📂 Category</li>
+
+<li>📊 Analytics</li>
+
+<li>⚙️ Settings</li>
+
+<li onclick="logout()">🚪 Logout</li>
+
+</ul>
+
+</div>
+
+<!-- MAIN -->
+
+<div class="main">
+
+<!-- TOPBAR -->
+
+<div class="topbar">
+
+<h2>
+
+Admin Dashboard
+
+</h2>
+
+<div>
+
+<span id="adminName">
+
+Administrator
+
 </span>
 
 </div>
 
 </div>
 
-<button class="btn"
-onclick="login()">
+<!-- STATISTICS -->
 
-Login
+<div class="stats">
+
+<div class="card">
+
+<h1 id="totalPosts">
+
+0
+
+</h1>
+
+<p>
+
+মোট পোস্ট
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h1 id="publishedPosts">
+
+0
+
+</h1>
+
+<p>
+
+Published
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h1 id="draftPosts">
+
+0
+
+</h1>
+
+<p>
+
+Draft
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h1 id="visitorCount">
+
+0
+
+</h1>
+
+<p>
+
+Visitors
+
+</p>
+
+</div>
+
+</div>
+
+<!-- CREATE POST -->
+
+<div class="card">
+
+<h2>
+
+✍️ নতুন পোস্ট
+
+</h2>
+
+<input
+
+id="title"
+
+type="text"
+
+placeholder="পোস্টের শিরোনাম"
+
+>
+
+<select id="category">
+
+<option>
+
+মোটিভেশন
+
+</option>
+
+<option>
+
+ইসলামিক
+
+</option>
+
+<option>
+
+শিক্ষামূলক
+
+</option>
+
+<option>
+
+আত্মউন্নয়ন
+
+</option>
+
+</select>
+
+<textarea
+
+id="content"
+
+placeholder="এখানে পোস্ট লিখুন..."
+
+></textarea>
+
+<select id="status">
+
+<option value="published">
+
+Published
+
+</option>
+
+<option value="draft">
+
+Draft
+
+</option>
+
+</select>
+
+<label>
+
+<input
+
+type="checkbox"
+
+id="featured"
+
+>
+
+Featured Post
+
+</label>
+
+<button
+
+id="publishBtn">
+
+🚀 Publish
 
 </button>
 
-<p id="loginMessage"></p>
+  </div>
+  <!-- ALL POSTS -->
+
+<div class="card">
+
+<h2>📚 সকল পোস্ট</h2>
+
+<input
+type="text"
+id="searchPost"
+placeholder="🔍 পোস্ট খুঁজুন...">
+
+<div id="postsContainer">
+
+<div class="empty">
+
+কোনো পোস্ট পাওয়া যায়নি
 
 </div>
 
 </div>
 
-<!-- Dashboard -->
-<div id="dashboard" class="hidden">
+</div>
 
-<!-- Step 4 এ এখানে Dashboard যুক্ত হবে -->
+<!-- EDIT MODAL -->
+
+<div
+id="editModal"
+class="modal hidden">
+
+<div class="modal-content">
+
+<h2>
+
+✏️ পোস্ট সম্পাদনা
+
+</h2>
+
+<input
+type="hidden"
+id="editId">
+
+<label>
+
+শিরোনাম
+
+</label>
+
+<input
+type="text"
+id="editTitle">
+
+<label>
+
+ক্যাটাগরি
+
+</label>
+
+<select
+id="editCategory">
+
+<option>
+
+মোটিভেশন
+
+</option>
+
+<option>
+
+ইসলামিক
+
+</option>
+
+<option>
+
+শিক্ষামূলক
+
+</option>
+
+<option>
+
+আত্মউন্নয়ন
+
+</option>
+
+</select>
+
+<label>
+
+বিষয়বস্তু
+
+</label>
+
+<textarea
+id="editContent"></textarea>
+
+<label>
+
+স্ট্যাটাস
+
+</label>
+
+<select
+id="editStatus">
+
+<option value="published">
+
+Published
+
+</option>
+
+<option value="draft">
+
+Draft
+
+</option>
+
+</select>
+
+<label>
+
+<input
+type="checkbox"
+id="editFeatured">
+
+Featured Post
+
+</label>
+
+<div
+class="modal-buttons">
+
+<button
+id="updateBtn">
+
+💾 Update
+
+</button>
+
+<button
+id="cancelBtn">
+
+❌ Cancel
+
+</button>
 
 </div>
 
-<script type="module" src="admin.js"></script>
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+
+© 2026
+জীবনের পাঠশালা
+
+</footer>
+
+<script
+type="module"
+src="admin.js">
+
+</script>
+
+</div>
 
 </body>
-</html>
+
+  </html>
+  
