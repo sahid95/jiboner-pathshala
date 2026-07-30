@@ -9,81 +9,66 @@
 content="width=device-width,initial-scale=1.0">
 
 <title>
-
-জীবনের পাঠশালা
-Admin Dashboard
-
+জীবনের পাঠশালা | Admin Dashboard
 </title>
 
 <link
 rel="stylesheet"
 href="style.css">
 
+<link
+rel="icon"
+href="assets/favicon.png">
+
 </head>
 
 <body>
 
-<!-- LOGIN -->
+<!-- ===========================
+LOGIN PAGE
+=========================== -->
 
 <div
-id="loginPage"
+id="loginSection"
 class="login-page">
 
 <div
 class="login-card">
 
-<h1>
-
-📖 জীবনের পাঠশালা
-
-</h1>
+<h1>📖 জীবনের পাঠশালা</h1>
 
 <p>
-
-Admin Login
-
+Admin Panel Login
 </p>
 
 <input
-
 type="email"
-
 id="email"
-
-placeholder="Email"
-
->
+placeholder="Email Address">
 
 <div
 class="password-box">
 
 <input
-
 type="password"
-
 id="password"
-
-placeholder="Password"
-
->
+placeholder="Password">
 
 <button
+type="button"
+onclick="togglePassword()">
 
-id="togglePassword"
-
-type="button">
-
-👁
+👁️
 
 </button>
 
 </div>
 
 <button
+id="loginBtn"
+onclick="login()">
 
-id="loginBtn">
-
-Login
+🔐 Login
 
 </button>
 
@@ -96,34 +81,74 @@ id="loginMessage">
 
 </div>
 
-<!-- DASHBOARD -->
+<!-- ===========================
+DASHBOARD
+=========================== -->
 
 <div
-
 id="dashboard"
-
 class="hidden">
-  <!-- SIDEBAR -->
+
+<!-- SIDEBAR -->
 
 <div class="sidebar">
 
-<h2>📖 জীবনের পাঠশালা</h2>
+<h2>
+
+📖 জীবনের পাঠশালা
+
+</h2>
 
 <ul>
 
-<li class="active">🏠 Dashboard</li>
+<li class="active">
 
-<li>📝 নতুন পোস্ট</li>
+🏠 Dashboard
 
-<li>📚 সকল পোস্ট</li>
+</li>
 
-<li>📂 Category</li>
+<li>
 
-<li>📊 Analytics</li>
+📝 New Post
 
-<li>⚙️ Settings</li>
+</li>
 
-<li onclick="logout()">🚪 Logout</li>
+<li>
+
+📚 All Posts
+
+</li>
+
+<li>
+
+📂 Categories
+
+</li>
+
+<li>
+
+📷 Media
+
+</li>
+
+<li>
+
+📊 Analytics
+
+</li>
+
+<li>
+
+⚙️ Settings
+
+</li>
+
+<li
+onclick="logout()">
+
+🚪 Logout
+
+</li>
 
 </ul>
 
@@ -143,15 +168,11 @@ Admin Dashboard
 
 </h2>
 
-<div>
-
 <span id="adminName">
 
 Administrator
 
 </span>
-
-</div>
 
 </div>
 
@@ -161,7 +182,8 @@ Administrator
 
 <div class="card">
 
-<h1 id="totalPosts">
+<h1
+id="totalPosts">
 
 0
 
@@ -177,7 +199,8 @@ Administrator
 
 <div class="card">
 
-<h1 id="publishedPosts">
+<h1
+id="publishedPosts">
 
 0
 
@@ -193,7 +216,8 @@ Published
 
 <div class="card">
 
-<h1 id="draftPosts">
+<h1
+id="draftPosts">
 
 0
 
@@ -209,7 +233,8 @@ Draft
 
 <div class="card">
 
-<h1 id="visitorCount">
+<h1
+id="visitorCount">
 
 0
 
@@ -224,50 +249,52 @@ Visitors
 </div>
 
 </div>
-
-<!-- CREATE POST -->
+<!-- ===========================
+NEW POST
+=========================== -->
 
 <div class="card">
 
 <h2>
 
-✍️ নতুন পোস্ট
+✍️ নতুন পোস্ট লিখুন
 
 </h2>
 
 <input
-
-id="title"
-
 type="text"
-
-placeholder="পোস্টের শিরোনাম"
-
->
+id="title"
+placeholder="পোস্টের শিরোনাম">
 
 <select id="category">
 
-<option>
+<option value="মোটিভেশন">
 
 মোটিভেশন
 
 </option>
 
-<option>
+<option value="ইসলামিক">
 
 ইসলামিক
 
 </option>
 
-<option>
+<option value="শিক্ষামূলক">
 
 শিক্ষামূলক
 
 </option>
 
-<option>
+<option value="আত্মউন্নয়ন">
 
 আত্মউন্নয়ন
+
+</option>
+
+<option value="দৈনন্দিন জীবনযাপন">
+
+দৈনন্দিন জীবনযাপন
 
 </option>
 
@@ -280,6 +307,26 @@ id="content"
 placeholder="এখানে পোস্ট লিখুন..."
 
 ></textarea>
+
+<label>
+
+📷 পোস্টের ছবি
+
+</label>
+
+<input
+
+type="file"
+
+id="image"
+
+accept="image/*">
+
+<label>
+
+পোস্ট স্ট্যাটাস
+
+</label>
 
 <select id="status">
 
@@ -303,11 +350,9 @@ Draft
 
 type="checkbox"
 
-id="featured"
+id="featured">
 
->
-
-Featured Post
+⭐ Featured Post
 
 </label>
 
@@ -315,23 +360,35 @@ Featured Post
 
 id="publishBtn">
 
-🚀 Publish
+🚀 Publish Post
 
 </button>
 
-  </div>
-  <!-- ALL POSTS -->
+</div>
+
+<!-- ===========================
+ALL POSTS
+=========================== -->
 
 <div class="card">
 
-<h2>📚 সকল পোস্ট</h2>
+<h2>
+
+📚 সকল পোস্ট
+
+</h2>
 
 <input
+
 type="text"
+
 id="searchPost"
+
 placeholder="🔍 পোস্ট খুঁজুন...">
 
-<div id="postsContainer">
+<div
+
+id="postsContainer">
 
 <div class="empty">
 
@@ -343,10 +400,14 @@ placeholder="🔍 পোস্ট খুঁজুন...">
 
 </div>
 
-<!-- EDIT MODAL -->
+<!-- ===========================
+EDIT MODAL
+=========================== -->
 
 <div
+
 id="editModal"
+
 class="modal hidden">
 
 <div class="modal-content">
@@ -358,7 +419,9 @@ class="modal hidden">
 </h2>
 
 <input
+
 type="hidden"
+
 id="editId">
 
 <label>
@@ -368,7 +431,9 @@ id="editId">
 </label>
 
 <input
+
 type="text"
+
 id="editTitle">
 
 <label>
@@ -378,6 +443,7 @@ id="editTitle">
 </label>
 
 <select
+
 id="editCategory">
 
 <option>
@@ -404,16 +470,25 @@ id="editCategory">
 
 </option>
 
+<option>
+
+দৈনন্দিন জীবনযাপন
+
+</option>
+
 </select>
 
 <label>
 
-বিষয়বস্তু
+পোস্ট
 
 </label>
 
 <textarea
-id="editContent"></textarea>
+
+id="editContent">
+
+</textarea>
 
 <label>
 
@@ -422,6 +497,7 @@ id="editContent"></textarea>
 </label>
 
 <select
+
 id="editStatus">
 
 <option value="published">
@@ -441,17 +517,19 @@ Draft
 <label>
 
 <input
+
 type="checkbox"
+
 id="editFeatured">
 
-Featured Post
+⭐ Featured
 
 </label>
 
-<div
-class="modal-buttons">
+<div class="modal-buttons">
 
 <button
+
 id="updateBtn">
 
 💾 Update
@@ -459,6 +537,7 @@ id="updateBtn">
 </button>
 
 <button
+
 id="cancelBtn">
 
 ❌ Cancel
@@ -469,16 +548,164 @@ id="cancelBtn">
 
 </div>
 
+  </div>
+  <!-- ===========================
+ANALYTICS
+=========================== -->
+
+<div class="card">
+
+<h2>
+
+📊 Website Analytics
+
+</h2>
+
+<div class="stats">
+
+<div class="card">
+
+<h1 id="todayVisitors">
+
+0
+
+</h1>
+
+<p>
+
+আজকের Visitor
+
+</p>
+
 </div>
 
-<!-- FOOTER -->
+<div class="card">
+
+<h1 id="monthVisitors">
+
+0
+
+</h1>
+
+<p>
+
+এই মাস
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h1 id="savedPosts">
+
+0
+
+</h1>
+
+<p>
+
+Saved Posts
+
+</p>
+
+</div>
+
+<div class="card">
+
+<h1 id="featuredPosts">
+
+0
+
+</h1>
+
+<p>
+
+Featured
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===========================
+SETTINGS
+=========================== -->
+
+<div class="card">
+
+<h2>
+
+⚙️ Settings
+
+</h2>
+
+<button id="changePasswordBtn">
+
+🔑 Change Password
+
+</button>
+
+<button id="darkModeBtn">
+
+🌙 Dark Mode
+
+</button>
+
+<button id="backupBtn">
+
+💾 Backup Database
+
+</button>
+
+<button id="restoreBtn">
+
+📥 Restore Database
+
+</button>
+
+</div>
+
+<!-- ===========================
+LOADING
+=========================== -->
+
+<div
+id="loading"
+class="hidden">
+
+Loading...
+
+</div>
+
+<!-- ===========================
+TOAST
+=========================== -->
+
+<div
+id="toast"
+class="hidden">
+
+Success
+
+</div>
+
+<!-- ===========================
+FOOTER
+=========================== -->
 
 <footer>
 
-© 2026
-জীবনের পাঠশালা
+© 2026 জীবনের পাঠশালা
 
 </footer>
+
+</div>
+
+</div>
 
 <script
 type="module"
@@ -486,9 +713,6 @@ src="admin.js">
 
 </script>
 
-</div>
-
 </body>
 
   </html>
-  
